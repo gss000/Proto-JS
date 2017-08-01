@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单验证1</title>
+    <style>
+        span{
+            margin-left: 5px;
+            font-size: 14px;
+        }
+        .stats1{
+            color: #cccccc;
+        }
+        .stats2{
+            color: #000;
+        }
+        .stats3{
+            color: #d81939;
+        }
+        .stats4{
+            color: #6f9400;
+        }
+        .submit{
+            font-size: 14px;
+            width: 60px;
+            height: 30px;
+            line-height: 20px;
+            text-align: center;
+            margin: 10px 34px;
+        }
+    </style>
+</head>
+<body>
+<form action="url" method="get">
+    <p>用户名：</p><input type="text" name="username"/><span class="stats1"></span><br/>
+    <p>邮 箱：</p><input type="text" name="email"/><span class="stats1"></span><br/>
+    <P>密 码:</P><input type="password" name="password"/><span class="stats1"></span><br/>
+    <P>确认密码：</P><input type="password" name="checkpass"/><span class="stats1"></span><br/>
+    <input type="submit" class="submit">
+</form>
+
+<script type="text/javascript">
+    function getSpan(obj){
+        if(obj.nextSibling.nodeName != 'SPAN'){
+            return getspan(obj.nextSibling);
+        }else{
+            return obj.nextSibling;
+        }
+    }
+
+    function checkInformation(obj, info, fun, click){
+        var sp = getSpan(obj);
+        obj.onfocus = function(){
+            sp.innerHTML = info;
+            sp.className = 'stats2';
+        }
+        obj.onblur = function(){
+            if(fun(this.value)){
+                sp.innerHTML = '';
+            }else{
+                sp.innerHTML = info;
+                sp.className = 'stats3';
+            }
+        }
+        if(click == 'click'){
+            obj.onblur();
+        }
+
+    }
+
+    window.onload = function(click){
+        var status = true;
+        var _user = document.getElementsByName('username')[0];
+        var _email = document.getElementsByName('email')[0];
+        var _password = document.getElementsByName('password')[0];
+        var _checkpass = document.getElementsByName('checkpass')[0];
+
+        checkInformation(_user, '用户名长度在3-20之间', function(v){
+            if(v.match(/^\S+$/) && v.length >= 3 && v.length <=20){
+                return true;
+            }else{
+                return false;
+                return status = false;
+            }
+        }, click);
+
+        checkInformation(_email, '请正确填写邮箱', function(v){
+            if(v.match(/\w+@\w+.\w/)){
+                return true;
+            }else{
+                return false;
+                return status = false;
+            }
+        }, click);
+
+        checkInformation(_password, '密码至少6位', function(v){
+            if(v.match(/^\S+$/) && v.length >= 6){
+                return true;
+            }else{
+                return false;
+                return status = false;
+            }
+        }, click);
+
+        checkInformation(_checkpass, '请再次确认密码', function(v){
+            if(v.match(/^\S+$/) && v.length >= 6){
+                return true;
+            }else{
+                return false;
+                return status = false;
+            }
+        }, click);
+
+        return status;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

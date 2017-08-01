@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单的音乐播放器</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .box{width: 300px;height: 300px;margin: 30px auto;}
+        .play{width: 30px;height: 20px;}
+        .pause{width: 30px;height: 20px;}
+        .next{width: 50px;height: 20px;}
+    </style>
+</head>
+<body>
+<div class="box">
+    <audio controls="controls" src="My%20Songs%20Know%20What%20You%20Did%20In%20The%20Dark.mp3">
+        <!--<source id="source" src="小幸运_田馥甄.mp3" type="audio/mp3">-->
+        <!--<source src="My Songs Know What You Did In The Dark.mp3" type="audio/mp3">-->
+    </audio>
+    <input class="play" type="button" value="播放">
+    <input class="pause" type="button" value="暂停">
+    <input class="next" id="next" type="button" value="下一首">
+</div>
+<script>
+    window.onload = function(){
+        var music = ["小幸运_田馥甄.mp3", "My Songs Know What You Did In The Dark.mp3"];
+        var _audio = document.querySelector('audio');
+        var _source = document.querySelector('source');
+        var btnPlay = document.querySelector('.play');
+        var btnPause= document.querySelector('.pause');
+        var btnNext = document.querySelector('.next');
+        var index = 0;
+
+        btnPlay.onclick = function(){
+            if(_audio.pause){
+                _audio.play();
+            }
+        }
+        btnPause.onclick = function(){
+            if(_audio.play){
+                _audio.pause();
+            }
+        }
+        btnNext.onclick = function(){
+            console.log( _audio.src);
+            if(index == 0){
+                index = 1;
+            }else {
+                index = 0;
+            }
+//            _audio.src = '';
+            _audio.src = music[index];
+            _audio.play();
+        }
+
+    }
+</script>
+</body>
+</html>

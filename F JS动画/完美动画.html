@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>同时运动</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        li{
+            list-style: none;
+            width: 200px;
+            height: 200px;
+            background:  orangered;
+            margin-bottom: 20px;
+            border: 3px solid #3b3b3b;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+            opacity: 0.3;
+        }
+    </style>
+    <script src="finalmove.js"></script>
+    <script>
+        window.onload = function(){
+            var oLi = document.getElementById('li1');
+            oLi.onmouseover = function(){
+                startmove(oLi, {"width": 240, height: 240, opacity:100});
+            }
+            oLi.onmouseout = function(){
+                startmove(oLi, {"width":200, height: 200, opacity:30});
+            }
+        }
+    </script>
+</head>
+<body>
+<ul>
+    <li id="li1"></li>
+</ul>
+</body>
+</html>

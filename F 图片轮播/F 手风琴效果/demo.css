@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul,ol{
+    list-style: none;
+}
+.container{
+    width: 938px;
+    height: 128px;
+    border: 1px solid #d3d3d3;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-top: 12px;
+}
+.container ul{
+    width: 1000px;
+}
+.container ul *{
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+.container li{
+    float: left;
+    width: 156px;
+    height: 128px;
+    overflow: hidden;
+}
+.container li a{
+    display: block;
+    width: 156px;
+    height: 128px;
+    position: relative;
+    text-decoration: none;
+    overflow: hidden;
+}
+.container ul li a:hover{
+    position: absolute;
+}
+.container ul li a:hover .mask{
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: opacity .2s ease-in;
+    -moz-transition: opacity .2s ease-in;
+    -ms-transition: opacity .2s ease-in;
+    -o-transition: opacity .2s ease-in;
+    transition: opacity .2s ease-in;
+}
+.container li img{
+    width: 117px;
+    height: 72px;
+    position: absolute;
+    bottom: 0;
+    right: -13px;
+    border: none;
+}
+.container li .info{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 136px;
+    padding: 4px 10px;
+}
+.info h3{
+    font-size: 14px;
+    font-weight: 700;
+    margin: 12px 0;
+}
+.info p{
+    font-size: 12px;
+    color: #868686;
+    margin: 2px 0;
+}
+.info .price{
+    margin: 5px 0;
+    color: #fa2a5d;
+}
+.info strong{
+    font-size: 22px;
+    font-weight: bold;
+    font-family: Arial;
+}
+.info i{
+    font-size: 14px;
+}
+.info .line{
+    position: absolute;
+    width: 0;
+    height: 128px;
+    right: 0;
+    top: 4px;
+    border-right: 1px dashed #cacaca;
+}
+.container .mask{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 156px;
+    height: 128px;
+    background-color: #000;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: opacity .2s ease-in;
+    -moz-transition: opacity .2s ease-in;
+    -ms-transition: opacity .2s ease-in;
+    -o-transition: opacity .2s ease-in;
+    transition: opacity .2s ease-in;
+}
+.container .big{
+    width: 314px;
+}
+.container .big a{
+    width: 314px;
+}
+.container .big img{
+    width: 195px;
+    height: 120px;
+    right: 0px;
+    bottom: 0px;
+}
+.big .info{
+    width: 294px;
+}
+.big h3{
+    font-size: 18px;
+}
+.big p{
+    font-size: 14px;
+    width: 166px;
+}
+.big .info p.price{
+    font-size: 16px;
+    padding-top: 7px;
+}
+.big .info p.price strong{
+    font-size: 28px;
+}
+.big .info p.price i{
+    font-size: 16px;
+}
+.big .mask{
+    width: 314px;
+}
+.container:hover .mask{
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=15);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=15);
+    opacity: 0.15;
+    -webkit-transition: opacity .2s ease-in;
+    -moz-transition: opacity .2s ease-in;
+    -ms-transition: opacity .2s ease-in;
+    -o-transition: opacity .2s ease-in;
+    transition: opacity .2s ease-in;
+}

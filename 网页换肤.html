@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网页换肤</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{background: #FA7FA4;}
+        .container{
+            width: 800px;
+            margin: 0 auto;
+        }
+        #bg{
+            height: 20px;
+            padding: 10px;
+
+        }
+        #bg li{
+            display: block;
+            float: left;
+            width: 10px;
+            height: 10px;
+            margin-right: 8px;
+            cursor: pointer;
+            list-style: none;
+            border-width: 5px;
+            border-style: solid;
+        }
+        #bg .current{
+            background: #fff!important;
+        }
+        #pink{border-color: #fa2a5d;background: #fa2a5d;}
+        #blue{border-color: #4593fd;background: #4593fd;}
+        #orange{border-color: #f01414;background: #f01414;}
+
+        .item{
+            float: left;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #CCCCCC;
+            background: #fa2a5d;
+            cursor: pointer;
+        }
+        .item a{
+            color: #FFFFFF;
+            font-size: 16px;
+
+            text-decoration: none;
+        }
+        .item a:hover{
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="bg">
+        <li id="pink" class="current" ></li>
+        <li id="blue"></li>
+        <li id="orange"></li>
+    </div>
+    <div id="nav">
+        <div class="item"><a href="">首页</a></div>
+        <div class="item"><a href="">热点</a></div>
+        <div class="item"><a href="">新闻</a></div>
+        <div class="item"><a href="">视频</a></div>
+    </div>
+</div>
+
+<script>
+    window.onload = function(){
+        var _li = $('bg').getElementsByTagName('li');
+        var _item = $('nav').getElementsByTagName('div');
+
+        for(var i=0; i<_li.length; i++){
+            _li[i].onclick = function(){
+                for(var j=0; j<_li.length; j++){
+                    _li[j].className = '';
+                }
+                this.className = 'current';
+                switch (this.id){
+                    case 'pink':
+                            for(var k=0;k<_item.length;k++){
+                                _item[k].style.background = '#fa2a5d';
+                            }
+                            document.body.style.background = '#FA7FA4';
+                        break;
+                    case 'blue':
+                        for(var k=0;k<_item.length;k++){
+                            _item[k].style.background = '#4593fd';
+                        }
+                        document.body.style.background = '#95BBFD';
+                        break;
+                    case 'orange':
+                        for(var k=0;k<_item.length;k++){
+                            _item[k].style.background = '#f01414';
+                        }
+                        document.body.style.background = '#F04A47';
+                        break;
+                }
+            }
+        }
+
+    }
+    function $(id){
+        return document.getElementById(id);
+    }
+</script>
+</body>
+</html>

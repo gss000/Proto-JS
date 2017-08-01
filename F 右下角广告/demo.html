@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>右下角广告</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            background: #666;
+        }
+        .box{
+            position: relative;
+            width: 960px;
+            margin: 0 auto;
+        }
+        ul{
+            list-style: none;
+        }
+        img{
+            display: block;
+            width: 960px;
+            height: 540px;
+        }
+        .rightAd{
+            width: 400px;
+            height: 300px;
+            background: #cccccc;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+        }
+        .hiden{
+            display: none;
+        }
+        .pic{
+            position: relative;
+        }
+        .pic img{
+            width: 400px;
+            height: 300px;
+            background: url("snow.gif") no-repeat;
+        }
+        .pic #icon{
+            width: 16px;
+            height: 16px;
+            background: url("icon.jpg") no-repeat -399px -19px;
+            display: inline-block;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+        }
+        .pic #icon:hover{
+            background-position: -343px -19px;
+        }
+        #title{
+            margin: 0 auto;
+            width: 1000px;
+            height: 0px;
+            background: #c7002b;
+        }
+    </style>
+</head>
+<body>
+<div id="title"></div>
+<div class="box">
+    <ul>
+        <li><img src="sg4.jpg" alt=""></li>
+        <li><img src="sg5.jpg" alt=""></li>
+        <li><img src="sg6.jpg" alt=""></li>
+        <li><img src="sg4.jpg" alt=""></li>
+        <li><img src="sg5.jpg" alt=""></li>
+        <li><img src="sg6.jpg" alt=""></li>
+        <li><img src="sg4.jpg" alt=""></li>
+        <li><img src="sg5.jpg" alt=""></li>
+        <li><img src="sg6.jpg" alt=""></li>
+        <li><img src="sg4.jpg" alt=""></li>
+        <li><img src="sg5.jpg" alt=""></li>
+        <li><img src="sg6.jpg" alt=""></li>
+        <li><img src="sg4.jpg" alt=""></li>
+        <li><img src="sg5.jpg" alt=""></li>
+        <li><img src="sg6.jpg" alt=""></li>
+        <li><img src="sg4.jpg" alt=""></li>
+        <li><img src="sg5.jpg" alt=""></li>
+        <li><img src="sg6.jpg" alt=""></li>
+        <li><img src="sg4.jpg" alt=""></li>
+        <li><img src="sg5.jpg" alt=""></li>
+        <li><img src="sg6.jpg" alt=""></li>
+        <li><img src="sg4.jpg" alt=""></li>
+        <li><img src="sg5.jpg" alt=""></li>
+        <li><img src="sg6.jpg" alt=""></li>
+    </ul>
+</div>
+</body>
+<div class="rightAd" id="rightAd">
+    <div class="pic">
+        <a href="www.baidu.com"><img alt=""></a>
+        <a href="javascript:;" id="icon"></a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function(){
+        var $ = function(id){
+            return document.getElementById(id);
+        }
+        $('icon').onclick = function(){
+            $('rightAd').className = 'hiden';
+        }
+
+        var tilH = $('title').offsetHeight;
+        var timer = null;
+        setTimeout(addinter, 1000);
+
+        function addinter(){
+            timer = setInterval(function(){
+                if(tilH >= 500){
+                    clearInterval(timer);
+                    setTimeout(subtract, 1000);
+                }else{
+                    tilH += 2;
+                    $('title').style.height = tilH + 'px';
+                }
+            }, 10);
+        }
+
+        function subtract(){
+            timer = setInterval(function(){
+                if(tilH <= 0){
+                    clearInterval(timer);
+                }else{
+                    tilH -= 2;
+                    $('title').style.height = tilH + 'px';
+                }
+            }, 10);
+        }
+
+    }
+</script>
+</html>

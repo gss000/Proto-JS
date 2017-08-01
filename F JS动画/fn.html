@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>链式运动</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        li{
+            list-style: none;
+            width: 200px;
+            height: 200px;
+            background:  orangered;
+            margin-bottom: 20px;
+            border: 3px solid #3b3b3b;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+            opacity: 0.3;
+        }
+    </style>
+    <script src="fnmove.js"></script>
+    <script>
+        window.onload = function(){
+            var li = document.getElementById('li');
+            li.onmouseover = function(){
+                move(li, 'width', 300, function(){
+                    move(li, 'height', 300, function(){
+                        move(li, 'opacity', 100);
+                    });
+                });
+            }
+            li.onmouseout = function(){
+                move(li, 'width', 200, function(){
+                    move(li, 'height', 200, function(){
+                        move(li, 'opacity', 30);
+                    });
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+<ul>
+    <li id="li"></li>
+</ul>
+</body>
+</html>

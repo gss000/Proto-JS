@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手机解锁效果</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #iphone{width: 426px;height: 640px;position: relative;margin: 10px auto;}
+        #ilock{width: 426px;height: 640px;position: absolute;margin-left: 50%;left: -213px;background: url("1.jpg")no-repeat;}
+        #ilock span{width: 93px;height: 62px;position: absolute;left: 34px;bottom: 33px;background: url("btn.jpg")no-repeat;cursor: pointer;}
+    </style>
+</head>
+<body>
+<div id="iphone">
+    <div id="ilock"><span></span></div>
+</div>
+<script>
+    window.onload = function(){
+        var phone = $('iphone');
+        var lock = $('ilock');
+        var btn = lock.getElementsByTagName('span')[0];
+        var disX = 0;
+        var maxL = lock.clientWidth - btn.offsetWidth;
+        var phoneimg = document.createElement('img');
+        phoneimg.src = "http://fgm.cc/iphone/2.jpg";
+
+        btn.onmousedown = function(e){
+            var e = e || window.event;
+            disX = e.clientX - this.offsetLeft;
+            document.onmousemove = function(e){
+                var e = e || window.event;
+                var l = e.clientX - disX;
+
+                l < 0 && (l = 0);
+                l > maxL && (l = maxL);
+
+                btn.style.left = l + 'px';
+                btn.offsetLeft == maxL && (lock.style.display = 'none', phone.style.background = "url("+ phoneimg.src +")");
+                return false;
+            }
+        }
+    }
+    function $(id){
+        return document.getElementById(id);
+    }
+</script>
+</body>
+</html>

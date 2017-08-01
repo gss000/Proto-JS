@@ -1,0 +1,18 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+body{
+    background: #f4f4f4;
+}
+
+a, img, span{
+    display: block;
+}
+
+ul{
+    display: block;
+    list-style: none;
+}

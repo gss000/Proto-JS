@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽-clone</title>
+    <style>
+        *{width:0;height:0;}
+        body{background: #8c8c8c;
+        }
+        div{position: absolute;width: 100px;height: 100px;border: 1px solid #cccccc;background: #ff3f05;box-sizing: border-box;cursor: move;}
+        #drag1{left: 50px;top: 50px}
+        #drag2{left: 200px;top: 50px;}
+        #temp{opacity: 0.3;filter: Alpha(opacity = 30);}
+    </style>
+</head>
+<body>
+<div id="drag1"></div>
+<div id="drag2"></div>
+
+<script>
+    var zindex = 1;
+    window.onload = function(){
+        var odrag1 = document.getElementById('drag1'),
+            odrag2 = document.getElementById('drag2');
+
+        drags(odrag1);
+        drags(odrag2);
+    }
+    function drags(drag){
+        var disx = 0, disy = 0;
+        drag.onmousedown = function(e){
+            var e = e || window.event;
+            disx = e.clientX - drag.offsetLeft;
+            disy = e.clientY - drag.offsetTop;
+
+            var otemp = document.createElement('div');
+            otemp["id"] = "temp";
+            otemp.style.left = this.currentStyle ? this.currentStyle["left"] : getComputedStyle(this, null)["left"];
+            otemp.style.top = this.currentStyle ? this.currentStyle["top"] : getComputedStyle(this, null)["top"];
+            otemp.style.zIndex = zindex++;
+            document.body.appendChild(otemp);
+
+            document.onmousemove = function(e){
+                var e = e || window.event;
+                var ileft = e.clientX - disx;
+                var itop = e.clientY - disy;
+                var maxl = document.documentElement.clientWidth - drag.offsetWidth;
+                var maxt = document.documentElement.clientHeight - drag.offsetHeight;
+
+
+                ileft<=0 && (ileft=0);
+                ileft>=maxl && (ileft=maxl);
+                itop<=0 && (itop=0);
+                itop>=maxt && (itop=maxt);
+
+                otemp.style.left = ileft + "px";
+                otemp.style.top = itop + "px";
+                 return false;
+            }
+
+            document.onmouseup = function(){
+                document.onmousedown = null;
+                document.onmousemove = null;
+                drag.style.left = otemp.style.left;
+                drag.style.top = otemp.style.top;
+                drag.style.zIndex = otemp.style.zIndex;
+                document.body.removeChild(otemp);
+                drag.releaseCapture && drag.releaseCapture();
+                return false;
+            }
+
+            this.setCapture && this.setCapture();
+            return false;
+
+        }
+
+    }
+
+</script>
+</body>
+</html>

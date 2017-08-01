@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网页计算器</title>
+    <style>
+        *{margin: 0; padding: 0; font: 700 12px/1.2em Arial;}
+        li{list-style: none;}
+        a{text-decoration: none; font: 700 24px/1.5 Arial;color: #fff;}
+        #calc{position: relative;width: 300px;margin: 20px auto;background: #444;border-radius: 5px}
+        #calc p{
+            text-align: right;
+            color: #fff;
+            padding: 5px;
+        }
+        .input-txt{
+            padding: 0px 5px;
+            width: 300px;
+            height: 84px;
+            line-height: 84px;
+            text-align: right;
+            font: 700 50px/84px Arial;
+            background: url("img/inputBg.jpg") repeat-x;
+            border: none;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .formula{
+            position: absolute;
+            right: 0;
+            top: 24px;
+            width: 300px;
+            height: 21px;
+            line-height: 21px;
+            text-align: right;
+            padding: 10px;
+            background: none;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border:none;}
+        .keyboard{
+            position: relative;
+            overflow: hidden;
+            zoom: 1;
+            background: url("img/bg.jpg");
+            padding: 0 0 17px 8px;
+        }
+        .keyboard li {
+            float: left;
+            margin: 17px 10px 0 0;
+            background: url("img/btn.png") no-repeat;
+        }
+        .keyboard li:hover{
+            background-position: -63px 0;
+        }
+        .keyboard li a{
+            display: block;
+            width: 63px;
+            height: 41px;
+            line-height: 41px;
+            text-align: center;
+        }
+        .keyboard .btn-1 {
+            background-position: 0 -41px;
+        }
+        .keyboard .btn-1:hover{
+            background-position: -63px -41px;
+        }
+        .keyboard .btn-2{
+            position: absolute;
+            top: 174px;
+            right: 0;
+            height: 99px;
+            background-position: 0 -164px;
+        }
+        .keyboard .btn-2:hover{
+            background-position: -63px -164px;
+        }
+        .keyboard .btn-2 a{
+            height: 99px;
+            line-height: 99px;
+        }
+        .keyboard .btn-3{
+            width: 136px;
+            background-position: 0 -82px;
+        }
+        .keyboard .btn-3:hover{
+            background-position: 0 -123px;
+        }
+        .keyboard .btn-3 a{
+            width: 136px;
+        }
+    </style>
+    <script type="text/javascript" src="calc.js"></script>
+</head>
+<body>
+<div id="calc">
+    <p>网页计算器</p>
+    <input type="text" readonly="readonly" class="formula" value="">
+    <input type="text" readonly="readonly" maxlength="9" value="0" class="input-txt">
+    <div class="keyboard">
+        <ul>
+            <li class="btn-1"><a href="javascript:void(0);" >C</a></li>
+            <li class="btn-1"><a href="javascript:void(0);">%</a></li>
+            <li class="btn-1"><a href="javascript:void(0);">÷</a></li>
+            <li class="btn-1"><a href="javascript:void(0);">×</a></li>
+            <li><a href="javascript:;">7</a></li>
+            <li><a href="javascript:;">8</a></li>
+            <li><a href="javascript:;">9</a></li>
+            <li class="btn-1"><a href="javascript:void(0);">-</a></li>
+            <li><a href="javascript:;">4</a></li>
+            <li><a href="javascript:;">5</a></li>
+            <li><a href="javascript:;">6</a></li>
+            <li class="btn-1"><a href="javascript:void(0);">+</a></li>
+            <li><a href="javascript:;">1</a></li>
+            <li><a href="javascript:;">2</a></li>
+            <li><a href="javascript:;">3</a></li>
+            <li class="btn-2"><a href="javascript:void(0);">=</a></li>
+            <li class="btn-3"><a href="javascript:void(0);">0</a></li>
+            <li><a href="javascript:;">.</a></li>
+        </ul>
+    </div>
+</div>
+
+
+</body>
+</html>

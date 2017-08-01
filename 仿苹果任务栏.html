@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>仿苹果任务栏</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #menu{position: absolute;width: 100%;bottom: 0;text-align: center}
+    </style>
+</head>
+<body>
+<div id="menu">
+    <img src="img/1.png" alt="">
+    <img src="img/2.png" alt="">
+    <img src="img/3.png" alt="">
+    <img src="img/4.png" alt="">
+    <img src="img/5.png" alt="">
+    <img src="img/6.png" alt="">
+    <img src="img/7.png" alt="">
+    <img src="img/8.png" alt="">
+</div>
+
+<script>
+    window.onload = function(){
+        var menu = document.getElementById('menu');
+        var imgs = menu.getElementsByTagName('img');
+        var imgWidth = [];
+
+        for(var i=0; i<imgs.length; i++){
+            imgWidth.push(imgs[i].offsetWidth);
+            imgs[i].width = parseInt(imgs[i].offsetWidth/2);
+        }
+
+//        鼠标移动事件
+        document.onmousemove = function(e){
+            var e = e || window.event;
+            for(var i=0;i<imgs.length;i++){
+                var a = e.clientX - imgs[i].offsetLeft - imgs[i].offsetWidth/2;
+                var b = e.clientY - imgs[i].offsetTop - menu.offsetTop - imgs[i].offsetHeight/2;
+                var iscale = 1 - Math.sqrt(a*a + b*b)/200;
+                if(iscale < 0.5) iscale = 0.5;
+                imgs[i].width = imgWidth[i]*iscale;
+            }
+        }
+
+    }
+</script>
+</body>
+</html>

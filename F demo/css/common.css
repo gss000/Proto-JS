@@ -1,0 +1,125 @@
+
+/*公共头*/
+.public-header{
+    margin: 0 auto;
+    height: 130px;
+    background: #ffffff;
+}
+
+.public-container{
+    margin: 0 auto;
+    width: 1200px;
+    background: #ffffff;
+}
+
+.header-logo{
+    float: left;
+    margin-right: 30px;
+    padding-top: 50px;
+}
+
+.header-list{
+    padding-top: 80px;
+}
+
+.list-head{
+    margin-right: 16px;
+}
+
+.header-list a{
+    float: left;
+    margin-left: 32px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+}
+
+.head-li{
+    float: left;  }
+.head-li:hover .li-triangle{
+    opacity: 1;  }
+.head-li:hover .li-triangle-frist{
+    opacity: 1;  }
+
+ .li-triangle-frist{
+     margin-left: 44px;
+     padding-bottom: 4px;
+     width: 9px;
+     height: 6px;
+     background: url("../img/triangle.png");
+     background-repeat: no-repeat;
+     opacity: 0;  }
+
+.li-triangle{
+    margin-left: 60px;
+    padding-bottom: 4px;
+    width: 9px;
+    height: 6px;
+    background: url("../img/triangle.png");
+    background-repeat: no-repeat;
+    opacity: 0;  }
+
+.list-fontcolor:hover{
+    color: #c7002b;
+}
+
+.header-enter{
+    float: right;
+}
+
+.enter-smith {
+    float: left;
+    margin-right: 40px;
+}
+.enter-ipad{
+    float: right;
+}
+
+/*公共尾*/
+.public-footer{
+    height: 300px;
+    background: #ffffff;
+}
+
+.footer-container{
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 1180px;
+}
+
+.public-footer ul{
+    margin-top: 40px;
+}
+
+.list-text1{
+    float: left;
+    margin-left: 10px;
+}
+
+.list-text2{
+    float: left;
+    margin-left: 34px;
+    margin-top: 54px;
+}
+
+.public-footer p{
+    font-weight: bold;
+    color: #666;
+    line-height: 14px;
+}
+
+.footer-img{
+    float: right;
+    width: 220px;
+}
+
+.img-code{
+    margin-top: -6px;
+    margin-left: 66px;
+}
+
+.img-app{
+    margin-right: 10px;
+    margin-top: 16px;
+}
+

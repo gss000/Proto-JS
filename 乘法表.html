@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>乘法表</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        #box p{
+            padding: 10px;
+            font-size: 16px;
+            font-weight: 200;
+        }
+        #count{
+            padding-left: 10px;
+        }
+        #count input{
+            width: 88px;
+            height: 8px;
+            padding: 6px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        #btn{
+            width: 26px;
+            height: 20px;
+        }
+        #notice{
+            display: none;
+            color: #ff0000;
+        }
+        table{
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <p>请输入数值:</p>
+    <div id="count">
+        <input type="text" >
+        <select name="symbol" id="symbol">
+            <option value="add">+</option>
+            <option value="minus">-</option>
+            <option value="ride">×</option>
+            <option value="eliminate">÷</option>
+        </select>
+        <input type="text">
+        <button id="btn">=</button>
+        <input type="text" value="" readonly="readonly">
+    </div>
+    <p id="notice">请输入数字！</p>
+</div>
+
+
+<script>
+    window.onload = function(){
+        var _count = document.getElementById('count');
+        var input = _count.getElementsByTagName('input');
+        var _select = document.getElementById('symbol');
+        var options = _select.getElementsByTagName('option');
+        var btn = document.getElementById('btn');
+        var notice = document.getElementById('notice');
+        //判断是否为数字
+        input[0].onblur  = function(){
+            if(isNaN(this.value)){
+                notice.style.display = 'block';
+            }else{
+                notice.style.display = 'none';
+            }
+        }
+        input[1].onblur = function(){
+            if(isNaN(this.value)){
+                notice.style.display = 'block';
+            }else{
+                notice.style.display = 'none';
+            }
+        }
+        btn.onclick = function(){
+            var num1 = parseFloat(input[0].value);
+            var num2 = parseFloat(input[1].value);
+            for(var i=0; i<options.length; i++){
+                if(options[i].selected){
+                    switch (options[i].value){
+                        case 'add':
+                            input[2].value = num1 + num2;
+                            break;
+                        case 'minus':
+                            input[2].value = num1 - num2;
+                            break;
+                        case 'ride':
+                            input[2].value = num1 * num2;
+                            break;
+                        case 'eliminate':
+                            if(num2 == 0){
+                                alert('除数不能为0');
+                                input[2].value = '';
+                                return;
+                            }
+                            input[2].value = num1 / num2;
+                            break;
+                    }
+                }
+
+
+
+            };
+        }
+
+
+
+
+        //乘法表
+        document.write('<table>');
+        for(var i=1; i<=9; i++){
+            document.write('<tr>');
+            for(var j=1; j<=i; j++){
+                document.write('<td style="border: 1px solid #d9dde1;text-align: center;padding: 5px;">'+ j + '×' + i + "=" + (i*j) + "</td>");
+            }
+            document.write('</tr>');
+        }
+        document.write('</table>');
+
+    }
+</script>
+
+</body>
+</html>

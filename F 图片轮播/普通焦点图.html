@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>普通焦点图</title>
+    <style>
+        img{
+            width: 480px;
+            height: 270px;
+        }
+        ul, li{
+            list-style: none;
+        }
+        #box {
+            margin: 0 auto;
+            width: 480px;
+            height: 270px;
+            overflow: hidden;
+            position: relative;
+        }
+        #ol{
+            position: absolute;
+            bottom: 10px;
+            left: 203px;
+        }
+        #ol li{
+            float: left;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: #ccc;
+            color: #f62368;
+            margin-right: 1px;
+            cursor: pointer;
+        }
+        #ol .active{
+            background: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="ul">
+        <li style="display: block;"><img src="img/sg1.jpg" alt=""></li>
+        <li><img src="img/sg2.jpg" alt=""></li>
+        <li><img src="img/sg3.jpg" alt=""></li>
+    </div>
+    <div id="ol">
+        <li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+    </div>
+</div>
+
+<script>
+    window.onload = function(){
+        var _ul = document.getElementById('ul'),
+            uLi = _ul.getElementsByTagName('li'),
+            _ol = document.getElementById('ol'),
+            oLi = _ol.getElementsByTagName('li');
+        for(var i=0; i<oLi.length; i++){
+            oLi[i].index = i;
+            oLi[i].onmouseover = function(){
+                for(var i=0; i<oLi.length; i++){
+                    oLi[i].className = '';
+                    uLi[i].style.display = 'none';
+                }
+                this.className = 'active';
+                uLi[this.index].style.display = 'block';
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

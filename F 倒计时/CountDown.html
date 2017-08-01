@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #time{
+            margin: 0 auto;
+            width: 400px;
+            height: 300px;
+            background: #CAD3D8;
+        }
+        #count{
+            font-size: 30px;
+            font-weight: bold;
+            color: #C72D0A;
+        }
+    </style>
+
+</head>
+<body >
+<div id="time">
+    <span id="count">天数</span>
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    window.onload = day;
+    function day(){
+        var showTime = document.getElementById('count');
+        var time = new Date();
+        var endtime = new Date("2017,6,6");
+        var leftsecond = endtime.getTime() - time.getTime();
+        var leftday = Math.ceil(leftsecond/86400000);
+        showTime.innerHTML = "离高考还有：" + '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + leftday + '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;天';
+    }
+</script>
+</body>
+</html>

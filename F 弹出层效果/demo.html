@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹出层</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .header{
+            height: 60px;
+            background: #2a2c2e;
+        }
+        .container{
+            width: 960px;
+            margin: 0 auto;
+        }
+        .header-logo{
+            float: left;
+            width: 220px;
+            height: 80px;
+            background: url("logo_index.png") no-repeat;
+            cursor: pointer;
+        }
+        .loginbtn{
+            float: right;
+            margin-top: 10px;
+        }
+        .login-btn{
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: #b83746;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+            color: #fff;
+            font-family: "微软雅黑";
+            font-size: 16px;
+            opacity: 0.9;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+            outline: none;
+        }.login-btn:hover{
+            opacity: 1;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+                 }
+        .body{
+            width: auto;
+            height: 768px;
+            background-image: url("river.jpg");
+            background-size: cover;
+        }
+        .footer{
+            width: auto;
+            height: 600px;
+            background-image: url("index_banner01.jpg");
+            background-size: cover;
+        }
+
+        #mask{
+            display: block;
+            background: #fff;
+            opacity: 0.40;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            height: 0;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 5;
+        }
+        #login{
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 35%;
+            z-index: 6;
+        }
+        .logincon{
+            width: 670px;
+            height: 380px;
+            background: url("loginBg.png");
+        }
+        #close{
+            position: absolute;
+            top: 18px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: url("close.png");
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <h1 class="header-logo">
+            <a href="#"></a>
+        </h1>
+        <div class="loginbtn">
+            <button class="login-btn" id="login-btn" hidefocus="true">登录</button>
+        </div>
+    </div>
+
+</div>
+<div class="body"></div>
+<div class="footer"></div>
+
+
+<!--<div id="mask"></div>-->
+<!--<div id="login">-->
+    <!--<div class="logincon">-->
+        <!--<div id="close"></div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<script type="text/javascript">
+//    //第一种方法，使用高度和
+//    window.onload = function(){
+//        var _btn = document.getElementById('login-btn');
+//        var _mask = document.getElementById('mask');
+//        var _login = document.getElementById('login');
+//        var _close = document.getElementById('close');
+//        var h = document.body.clientHeight || document.documentElement.clientHeight;
+//        console.log(h);
+//
+//        _btn.onclick = function(){
+//            _mask.style.height = h + 'px';
+//            _login.style.display = 'block';
+//        }
+//        _mask.onclick = _close.onclick = function(){
+//            _mask.style.height = 0;
+//            _login.style.display = 'none';
+//        }
+//    }
+
+    //第二种方法,新建元素添加到页面
+    function loginNew(){
+        //获取可视区域宽度
+        var sWidth = document.body.scrollWidth;
+        var sHeight = document.body.scrollHeight;
+        console.log(sHeight);
+        //获取页面实际高度
+        var wHeight = document.body.clientHeight;
+        console.log(wHeight);
+
+        //添加元素
+        var omask = document.createElement('div');
+        omask.id = 'mask';
+        omask.style.height = wHeight + 'px';
+        document.body.appendChild(omask);
+
+        var ologin = document.createElement('div');
+        ologin.id = 'login';
+        ologin.innerHTML = "<div class='logincon'><div id='close'></div></div>";
+        ologin.style.display = 'block';
+        document.body.appendChild(ologin);
+        //设置登录框的位置
+        var loginW = ologin.offsetWidth;
+        var loginH = ologin.offsetHeight;
+//        ologin.style.top = sHeight/2 - loginH/2 + 'px';
+//        ologin.style.left = sWidth/2 - loginW/2 + 'px';
+
+        var _close = document.getElementById('close');
+
+        _close.onclick = omask.onclick = function(){
+            document.body.removeChild(ologin);
+            document.body.removeChild(omask);
+        }
+    }
+    window.onload = function(){
+        var btn = document.getElementById('login-btn');
+        btn.onclick = function(){
+            loginNew();
+        }
+
+    }
+</script>
+</body>
+</html>

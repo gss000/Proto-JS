@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片轮播</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        img{
+            width: 700px;
+            height: 500px;
+        }
+        .cantain{
+            display: block;
+            margin: 0 auto;
+            width: 700px;
+            height: 700px;
+        }
+    </style>
+</head>
+<body>
+<div class="cantain">
+    <ul >
+        <li><img id="img" src="img/sg1.jpg" alt=""></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    var curindex = 0;
+    var arr = new Array('sg1.jpg', 'sg2.jpg', 'sg3.jpg', 'sg4.jpg', 'sg5.jpg');
+    timer = setInterval(fn,2000);
+    function fn(){
+        var _img = document.getElementById('img');
+        if(curindex == arr.length-1){
+            curindex = 0;
+        }else{
+            curindex+=1;
+        }
+        _img.src = arr[curindex];
+    }
+
+
+</script>
+</body>
+</html>

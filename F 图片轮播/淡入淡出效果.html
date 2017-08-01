@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>淡入淡出</title>
+    <style>
+        img{
+            width: 480px;
+            height: 270px;
+        }
+        ul, li{
+            list-style: none;
+        }
+        #box {
+            margin: 0 auto;
+            width: 480px;
+            height: 270px;
+            overflow: hidden;
+            position: relative;
+        }
+        #ul li{
+            background: #fff;
+            opacity: 1;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            /*-webkit-transition: all 1s;*/
+            /*-moz-transition: all 1s;*/
+            /*-ms-transition: all 1s;*/
+            /*-o-transition: all 1s;*/
+            /*transition: all 1s;*/
+        }
+        #ol{
+            position: absolute;
+            bottom: 10px;
+            left: 203px;
+        }
+        #ol li{
+            float: left;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: #ccc;
+            color: #f62368;
+            margin-right: 1px;
+            cursor: pointer;
+        }
+        #ol .active{
+            background: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="ul">
+        <li style="display: block;"><img src="img/sg1.jpg" alt=""></li>
+        <li><img src="img/sg2.jpg" alt=""></li>
+        <li><img src="img/sg3.jpg" alt=""></li>
+    </div>
+    <div id="ol">
+        <li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+    </div>
+</div>
+
+<script>
+    window.onload = function(){
+        var _ul = document.getElementById ('ul');
+        var uLi = _ul.getElementsByTagName('li');
+        var _ol = document.getElementById('ol');
+        var oLi = _ol.getElementsByTagName('li');
+        for(var i=0; i<oLi.length; i++){
+            oLi[i].index = i;
+            oLi[i].onmouseover = function(){
+                for(var j=0; j<oLi.length; j++){
+                    oLi[j].className = '';
+                    uLi[j].style.display = 'none';
+                    uLi[j].style.opacity = '0';
+                    uLi[j].style.filter = 'alpha(opacity:0)';
+                }
+                this.className = 'active';
+                uLi[this.index].style.display = 'block';
+                startmove(uLi[this.index], {opacity:100}, 80);
+//                console.log(uLi[this.index]);
+//                console.log(getStyle(uLi[this.index], "opacity"));
+//                console.log(window.getComputedStyle(uLi[this.index], null)["width"]);
+//                console.log(uLi[this.index].currentStyle["opacity"]);
+            }
+            oLi[i].onmouseout = function(){
+                clearInterval(this.timer);
+            }
+        }
+    }
+
+    function startmove(obj, json, time, fn){
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function(){
+            var flag = true;
+            for(var attr in json)
+            {
+                //1.取值
+                var iCur = 0;
+                if(attr == 'opacity'){
+                    iCur = Math.round(parseFloat(getStyle(obj, attr))*100);
+                }else{
+                    iCur = parseInt(getStyle(obj, attr));
+                }
+
+                //2.获取速度
+                var speed = (json[attr] - iCur)/5;
+                speed = speed>0 ? Math.ceil(speed):Math.floor(speed);
+                //3.停止计时器，以及运动
+                if(iCur != json[attr]){
+                    flag = false;
+                    //不是所有的元素都到达相应的值那么这个flag是false并且继续执行，知道所有的元素完成对应值
+                }
+                if(attr == 'opacity'){
+                    obj.style.filter = 'alpha(opacity:'+iCur + speed+')';
+                    obj.style.opacity = (iCur + speed)/100;
+                }else{
+                    obj.style[attr] = iCur + speed + 'px';
+                }
+            }
+
+            if(flag){
+                //当循环出来所有的值都完成，然后把定时器取消，并且判断是否有回调函数
+                clearInterval(obj.timer);
+                if(fn){
+                    fn();
+                }
+            }
+        }, time);
+    }
+
+    function getStyle(obj, attr){
+        if(obj.currentStyle){
+            return obj.currentStyle[attr];
+        }else{
+            return getComputedStyle(obj, false)[attr];
+        }
+    }
+
+</script>
+</body>
+</html>

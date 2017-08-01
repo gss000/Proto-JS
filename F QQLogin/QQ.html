@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QQ</title>
+    <link rel="stylesheet" href="css/qqlogin.css">
+    <script type="text/javascript" src="js/qdrag.js"></script>
+</head>
+<body>
+<div class="loginpanel" id="loginPanel">
+    <div style="position: relative; z-index: 1;">
+        <div class="ui-boxclose" id="ui-boxclose"></div>
+    </div>
+    <div class="login-webqq-logo"></div>
+
+
+    <div class="inputs">
+    <span class="sign-input">
+        <span>帐 号:</span>
+        <span>
+            <input autocomplete="on" name="u" id="u" type="text" style="ime-mode: disabled" class="input01" tabindex="1" value="QQ号码或email帐号" onfocus="if(value == 'QQ号码或email帐号'){value = ''}" onblur="if (value == ''){value = 'QQ号码或email帐号';}" />
+        </span>
+    </span>
+    <span class="sign-input">
+        <span>密 码:</span>
+        <span>
+            <input name="p" id="p" maxlength="16" type="password" class="input01" tabindex="2" />
+        </span>
+    </span>
+    </div>
+
+
+    <div class="bottomDiv">
+        <div class="btn" style="float: left;"></div>
+        <div>
+            <div id="loginstate" class="login-state-trigger login-state-trigger2 login-state" title="请选择状态">
+                <div id="loginStateShow" class="login-state-show online"></div>
+                <div class="login-state-down">下</div>
+                <div class="login-state-txt" id="login2qq-state-txt">在线</div>
+                <ul id="loginStatePanel" class="statePanel login-state" style="display: none">
+                    <li id="online" class="statePanel-li">
+                        <div class="stateSelect-icon online"></div>
+                        <div class="stateSelect-text">我在线上</div>
+                    </li>
+                    <li id="callme" class="statePanel-li">
+                        <div class="stateSelect-icon callme"></div>
+                        <div class="stateSelect-text">Q我吧</div>
+                    </li>
+                    <li id="away" class="statePanel-li">
+                        <div class="stateSelect-icon away"></div>
+                        <div class="stateSelect-text">离开</div>
+                    </li>
+                    <li id="busy" class="statePanel-li">
+                        <div class="stateSelect-icon busy"></div>
+                        <div class="stateSelect-text">忙碌</div>
+                    </li>
+                    <li id="silent" class="statePanel-li">
+                        <div class="stateSelect-icon silent"></div>
+                        <div class="stateSelect-text">请勿打扰</div>
+                    </li>
+                    <li id="hidden" class="statePanel-li">
+                        <div class="stateSelect-icon hidden"></div>
+                        <div class="stateSelect-text">隐身</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

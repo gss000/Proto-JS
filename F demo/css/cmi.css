@@ -1,0 +1,273 @@
+/*banner样式*/
+.cmi-banner{
+    margin: 0 auto;
+    height: 480px;
+    background: url("../img/cmi-banner.png");
+    background-size: cover;/* 大屏幕的时候 防止图像重叠显示，可以用cover拉伸*/
+}
+
+.banner-leftmod{
+    float: left;
+    margin-top: 60px;
+}
+
+.banner-rightmod{
+    float: left;
+    margin-top: 60px;
+}
+
+
+/*plug-in样式*/
+
+/*.plug-in{*/
+    /*float: left;*/
+    /*padding-top: 70px;*/
+    /*margin-left: 10px;*/
+/*}*/
+
+
+/*introduce样式*/
+.cmi-introduce{
+    margin-top: 70px;
+    margin-bottom: 40px;
+    width: 1200px;
+    height: 680px;
+    background: #ffffff;
+}
+
+.cmi-logo{
+    float: left;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-right: 20px;
+}
+
+.cmi-logotxt{
+    padding-top: 30px;
+    font-weight: bold;
+    font-size: 40px;
+    font-family: 微软雅黑;
+}
+
+.cmi-ceo{
+    margin-top: 40px;
+    margin-left: 46px;
+}
+
+.cmi-36{
+    float: left;
+    margin-right: 20px;
+}
+
+.cmi-title{
+    display: block;
+    margin-bottom: -10px;
+    font-size: 28px;
+    font-family: 微软雅黑;
+    font-weight: bold;
+    font-weight: normal;
+    line-height: 40px;
+}
+
+.cmi-text{
+    display: block;
+    margin-right: 30px;
+    font-size: 13px;
+    font-family: 微软雅黑;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+.cmi-line{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 1180px;
+    border: 1px dashed #eeeeee;
+    background: #ffffff;
+}
+
+.cmi-member li{
+    float: left;
+    font-size: 14px;
+    font-family: 微软雅黑;
+    font-weight: bold;
+    line-height: 22px;
+    font-weight: 500;
+    background: #ffffff;
+}
+
+.cmi-member img{
+    margin-bottom: 22px;
+}
+
+.cmi-member hr{
+    float: left;
+    margin-left: 10px;
+    margin-right: 9px;
+    width: 0px;
+    height: 300px;
+    border: 1px dashed #eeeeee;
+}
+
+
+
+
+/*information样式*/
+
+.cmi-information{
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.infor-time{
+    float: left;
+    width: 790px;
+    height: 450px;
+    background: #ffffff;
+}
+
+.infor-logo{
+    float: left;
+}
+
+.infor-l{
+    float: left;
+    margin-top: 50px;
+    margin-left: 178px;
+    width: 40px;
+    border: 1px solid #dedede;
+}
+
+.infor-m{
+    float: left;
+    margin-left: 16px;
+    margin-top: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 微软雅黑;
+}
+
+.infor-r{
+    float: right;
+    margin-top: 50px;
+    margin-right: 280px;
+    width: 40px;
+    border: 1px solid #dedede;
+}
+
+.infor-day{
+    margin-left: 222px;
+    padding-top: 40px;
+}
+
+.day-time{
+    margin-left: 268px;
+    padding-top: 40px;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 微软雅黑;
+}
+
+.price-n{
+    float: left;
+    margin-left: 246px;
+    margin-top: 28px;
+    font-size: 20px;
+    color: #36383a;
+    font-family: 微软雅黑;
+}
+
+.price-o{
+    float: left;
+    margin-left: 16px;
+    margin-top: 28px;
+    text-decoration: line-through;
+    font-size: 20px;
+    color: #aaaaaa;
+    font-family: 微软雅黑;
+}
+
+.infor-btn{
+    margin-left: 245px;
+    margin-top: 80px;
+}
+
+.infor-listnews{
+    margin-left: 810px;
+}
+
+
+
+/*guest样式*/
+.cmi-guest{
+    margin-top: 40px;
+    height: 430px;
+    background: #ffffff;
+}
+
+.guest-txt{
+    padding-left: 42px;
+    padding-top: 22px;
+    margin-bottom: 24px;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 微软雅黑;
+}
+
+.cmi-guest ul{
+    padding-left: 10px;
+}
+
+.guest-49{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.cmi-guest li{
+    float: left;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: 微软雅黑;
+    line-height: 22px;
+}
+
+.name{
+    margin-left: 12px;
+    margin-top: 14px;
+    margin-bottom: -18px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 微软雅黑;
+}
+
+/*cmi-stament样式*/
+
+.cmi-statement{
+    height: 100px;
+    background: #f4f4f4;
+}
+
+.sta-l{
+    float: left;
+    margin-top: 48px;
+    width: 280px;
+    border: 1px solid #dedede;
+}
+
+.sta-m{
+    float: left;
+    margin-top: 38px;
+    margin-left: 14px;
+    margin-right: 14px;
+    font-size: 20px;
+    font-weight: normal;
+    font-family: 微软雅黑;
+    color: #dedede;
+}
+
+.sta-r{
+    float: right;
+    margin-top: 48px;
+    width: 280px;
+    border: 1px solid #dedede;
+}

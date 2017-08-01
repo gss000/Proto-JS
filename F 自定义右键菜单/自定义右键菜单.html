@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义右键菜单</title>
+    <style>
+        html, body{height: 100%;overflow: hidden;}
+        body, ul, li, div{margin: 0;padding: 0;font-size: 12px;font-family: "微软雅黑";}
+        ul,ol,li{list-style: none;}
+        a{text-decoration: none;color: #444;}
+        .title{margin: 5px auto;width: 200px;}
+        #rightMenu{
+            /*display: none;*/
+            position: relative;
+            width: 156px;
+            height: 102px;
+            /*left: -999px;*/
+            /*top: -999px;*/
+        }
+        #rightMenu ul{
+            float: left;
+            padding: 2px;
+            background: #f1f1f1 url("line.png") 24px 0 repeat-y;
+            border: 1px solid #979797;
+            box-shadow: 2px 2px 2px  #979797;
+        }
+        #rightMenu ul li{
+            float: left;
+            clear: both;
+            white-space: nowrap;
+            height:  24px;
+            line-height: 24px;
+            padding: 0 30px;
+            cursor: pointer;
+        }
+        #rightMenu ul li:hover{
+            background-color: #f1f3f6;
+            border-radius: 3px;
+            border: 1px solid #aecff7;
+            height: 22px;
+            line-height: 22px;
+            padding: 0 29px;
+            background-position: right -8px;
+        }
+        #rightMenu ul li.sub{
+            background: url("arrow.png") right 8px no-repeat;
+        }
+        #rightMenu ul ul {
+            display: none;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<p class="title">自定义右键菜单，点击查看</p>
+<div id="rightMenu">
+    <ul>
+        <li ><a href=""><strong>Javascript学习</strong></a></li>
+        <li >
+            第一课
+            <ul>
+                <li>网页特效分析</li>
+                <li>响应客户操作</li>
+                <li>提示框效果</li>
+                <li>事件驱动</li>
+                <li>元素属性操作</li>
+            </ul>
+        </li >
+        <li >
+            第二课
+            <ul>
+                <li>改变网页背景颜色</li>
+                <li>函数传参</li>
+                <li>循环遍历操作</li>
+                <li>126邮箱效果</li>
+            </ul>
+        </li>
+        <li >
+            第三课
+            <ul>
+                <li >
+                    Javascript组成
+                    <ul>
+                        <li>ECMAScript</li>
+                        <li>DOM</li>
+                        <li>BOM</li>
+                        <li>Javascript兼容性来源</li>
+                    </ul>
+                </li>
+                <li>Javascript出现的位置、优缺点</li>
+                <li>变量、类型、typeof、数据类型转换、变量作用域</li>
+                <li>
+                    闭包
+                    <ul>
+                        <li>什么是闭包</li>
+                        <li>闭包的缺点</li>
+                    </ul>
+                </li>
+                <li>运算符</li>
+                <li>程序流程控制</li>
+                <li >
+                    定时器的使用
+                    <ul>
+                        <li>setinterval</li>
+                        <li>settimeout</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+
+<script>
+    var getoffset = {
+        top: function(obj){
+            return obj.offsetTop + (obj.offsetParent?arguments.callee(obj.offsetParent) : 0);
+        },
+        left: function(obj) {
+            return obj.offsetLeft + (obj.offsetParent ? arguments.callee(obj.offsetParent) : 0);
+        }
+    };
+    window.onload = function(){
+        var menu = document.getElementById('rightMenu'),
+                _ul = menu.getElementsByTagName('ul')[0],
+                lis = menu.getElementsByTagName('li');
+        var showtimer = null, hidetimer = null;
+        var maxLiwidth;
+        var maxwidth = 0, maxheight = 0;
+        var bodywidth = document.documentElement.offsetWidth || document.body.offsetWidth;
+        var bodyheight = document.documentElement.offsetHeight || document.body.offsetHeight;
+
+        for(var i=0;i<lis.length;i++){
+            //            有子菜单的添加箭头
+            if(lis[i].getElementsByTagName('ul')[0]){
+                lis[i].className = 'sub';
+            }
+            lis[i].onmouseover = function(){
+                var othis = this,
+                    cul = othis.getElementsByTagName('ul')[0];
+                if(cul){
+                    clearTimeout(hidetimer);
+                    showtimer = setTimeout(function(){
+                        for(var i=0; i<othis.parentNode.children.length;i++){
+                            othis.parentNode.children[i].getElementsByTagName('ul')[0]&&
+                            (othis.parentNode.children[i].getElementsByTagName('ul')[0].style.display = 'none');
+                        }
+                        cul.style.display = 'block';
+                        cul.style.top = othis.offsetTop + 'px';
+                        cul.style.left = othis.offsetWidth + 'px';
+                        setLiwidth(cul);
+                        maxwidth = bodywidth - cul.offsetWidth;
+                        maxheight = bodyheight - cul.offsetHeight;
+
+                        maxwidth<getoffset.left(cul&&(cul.style.left = -cul.clientWidth + 'px'));
+                        maxheight<getoffset.top(cul&&(cul.style.top = -cul.clientHeight + othis.offsetTop + 'px'));
+
+                    }, 100);
+                }
+            }
+            lis[i].onmouseout = function(){
+                var othis = this,
+                    cul = othis.getElementsByTagName('ul')[0];
+
+                clearTimeout(showtimer);
+                hidetimer = setTimeout(function(){
+                    for(var i=0;i<othis.parentNode.children.length;i++){
+                        othis.parentNode.children[i].getElementsByTagName('ul')[0]&&
+                        (othis.parentNode.children[i].getElementsByTagName('ul')[0].style.display = 'none');
+                    }
+                }, 100);
+            }
+            }
+//        右键功能
+        document.oncontextmenu = function(e){
+            var e = e || window.event;
+            menu.style.display = 'block';
+            menu.style.left = e.clientX + 'px';
+            menu.style.top = (e.clientY - 24) + 'px';
+            setLiwidth(_ul);
+            maxwidth = bodywidth - menu.offsetWidth;
+            maxheight = bodyheight - menu.offsetHeight - 24;
+            console.log(menu.offsetHeight)
+            menu.offsetTop > maxheight && (menu.style.top = maxheight + 'px');
+            menu.offsetLeft > maxwidth && (menu.style.left = maxwidth + 'px');
+            return false;
+        }
+//        点击隐藏
+        document.onclick = function(){
+            menu.style.display = 'none';
+        }
+
+        function setLiwidth(obj){
+            maxLiwidth = 0;
+            for(var i=0;i<obj.children.length;i++){
+                var iwidth = obj.children[i].clientWidth - parseInt(getStyle(obj.children[i], 'padding-left'))*2;
+                if(iwidth > maxLiwidth) maxLiwidth = iwidth;
+            }
+            for(var i=0;i<obj.children.length;i++) obj.children[i].style.width = maxLiwidth + 'px';
+        }
+
+        function getStyle(obj, attr){
+            if(obj.currentStyle){
+                return obj.currentStyle[attr];
+            }else{
+                return getComputedStyle(obj, null)[attr];
+            }
+        }
+
+    }
+</script>
+</html>

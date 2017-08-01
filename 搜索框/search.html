@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜 索</title>
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge"/>
+    <style type="text/css">
+        body{
+            background: url("river.jpg") no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
+        }
+        .divbg{
+            position: relative;
+        }
+        .box{
+            position: absolute;
+            top: 200px;
+            left: 300px;
+        }
+        .logo{
+            float: left;
+            width: 107px;
+            height: 53px;
+            background: url("logo.png");
+        }
+        form{
+            display: block;
+            float: left;
+            margin-left: 10px;
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #fff;
+        }
+        .search-txt{
+            float: left;
+            width: 350px;
+            height: 26px;
+            line-height: 26px;
+            outline: none;
+            border: 0;
+        }
+        .search-btn{
+            float: left;
+            border: 0;
+            background-image: url("search-button.png");
+            width: 29px;
+            height: 29px;
+            cursor: pointer;
+        }
+        .suggest{
+            position: absolute;
+            width: 388px;
+            background-color: #fff;
+            border: 1px solid #999;
+        }
+        .suggest ul{
+            margin: 0;
+            padding: 0;
+        }
+        .suggest ul li{
+            padding: 5px;
+            list-style: none;
+            font-size: 16px;
+            line-height: 24px;
+            cursor: pointer;
+        }
+        /*.suggest ul li:hover{*/
+            /*text-decoration: underline;*/
+            /*background-color: #e5e5e5;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div class="divbg" id="divbg">
+    <div class="box" id="box">
+        <div class="logo"></div>
+        <form action="" id="form">
+            <input type="text" class="search-txt" id="search-input"/>
+            <input type="submit" value=""  class="search-btn"/>
+        </form>
+    </div>
+    <div class="suggest" id="suggest" style="display: none;">
+        <ul>
+            <li>参数</li>
+            <li>参数</li>
+            <li>参数</li>
+        </ul>
+    </div>
+</div>
+<script src="jquery.min.js"></script>
+
+<!--jquery-->
+<script>
+    (function(){
+        var _suggest = $('#suggest');
+        $('#search-input').bind('keyup', function(){
+            var sgleft = $(this).offset().left - 13;
+            var sgtop = $(this).offset().top + $(this).height();
+            _suggest.css('left', sgleft);
+            _suggest.css('top', sgtop);
+            _suggest.show();
+
+            $('#suggest ul li').hover(function(){
+                $(this).css({"backgroundColor":"#e5e5e5", "textDecoration":"underline"});
+            }, function(){
+                $(this).css({"backgroundColor":"#fff", "textDecoration":"none"});
+            })
+        });
+    })();
+</script>
+
+
+<!--原生JS-->
+<!--<script>-->
+    <!--window.onload = function(){-->
+        <!--var ajaxGet = function(url, callback){-->
+            <!--var _xhr = null;-->
+            <!--if(window.XMLHttpRequest){-->
+                <!--_xhr = new window.XMLHttpRequest();-->
+                <!--//在非IE下使用XMLHttpRequest-->
+            <!--}else{-->
+                <!--_xhr = new ActiveXObject("Msxml2.XMLHTTP");-->
+                <!--//在IE下使用ActiveXObject-->
+            <!--}-->
+            <!--_xhr.onreadystatechange = function(){-->
+                <!--if(_xhr.readyState == 4 && _xhr.status == 200){-->
+                    <!--callback(JSON.parse(_xhr.responseText));-->
+                    <!--//浏览器返回的信息使用responseText属性获取再用json.parse来转换-->
+                <!--}-->
+            <!--}-->
+            <!--//当readyState==4且status==200时，表示服务器正确响应并返回信息-->
+            <!--_xhr.open('get', url, true);//get方式，true异步-->
+            <!--_xhr.send(null);-->
+        <!--}//在JavaScript下使用ajax-->
+
+        <!--var obj = document.getElementById('suggest');-->
+        <!--var ele = document.getElementById('form');-->
+        <!--var searchIput = document.getElementById('search-input');-->
+        <!--var searchTxt = searchIput.value;-->
+
+        <!--ajaxGet('http://api.bing.com/qsonhs.aspx?q=='+searchTxt,function(d){-->
+            <!--var d = d.AS.Results[0].Suggests;-->
+            <!--var html = '';-->
+            <!--for(var i=0;i< d.length;i++){-->
+                <!--html+='<li>'+ d[i].Txt +'</li>';-->
+            <!--}-->
+        <!--})-->
+        <!--ele.onkeypress = function (){-->
+            <!--obj.style.left = ele.offsetParent.offsetLeft + ele.offsetLeft + 'px';-->
+            <!--obj.style.top = ele.offsetParent.offsetTop + ele.offsetTop + 39 + 'px';-->
+            <!--obj.style.position = 'absolute';-->
+            <!--obj.style.display = 'block';-->
+        <!--}-->
+    <!--}-->
+<!--</script>-->
+</body>
+</html>

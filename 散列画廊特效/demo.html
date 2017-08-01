@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>海报画廊</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: #fff;
+            color: #555;
+            font-size: 14px;
+            font-family: 'Adobe 宋体 Std L';
+            -webkit-font-smoothing: antialiased;
+            /*这个样式可以使字体平滑一点*/
+        }
+        .wrap{
+            width: 100%;
+            height: 600px;
+            position: absolute;
+            top: 50%;
+            margin-top: -300px;
+            background: #333;
+            overflow: hidden;
+            -webkit-perspective: 800px;
+            -moz-perspective: 800px;
+
+        }
+        .photo{
+            width: 260px;
+            height: 320px;
+            position: relative;
+            z-index: 1;
+            -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .01);
+            -moz-box-shadow: 0 0 1px rgba(0, 0, 0, .01);
+            box-shadow: 0 0 1px rgba(0, 0, 0, .01);
+        }
+        .photo .side{
+            width: 100%;
+            height: 100%;
+            background: #eee;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 10px;
+            box-sizing: border-box;
+            /*表示边框和内容都在border以内*/
+        }
+        .photo .side-front{}
+        .photo .side-front .image{
+            width: 100%;
+            height: 260px;
+            line-height: 260px;
+            overflow: hidden;
+        }
+        .photo .side-front .image img{
+            width: 260px;
+            height: 320px;
+        }
+        .photo .side-front .txt{
+            text-align: center;
+            line-height: 60px;
+        }
+        .photo .side-back{
+            text-align: center;
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.4em;
+        }
+
+        /*当前选中海报样式*/
+        .photo_center{
+            left: 50%;
+            top: 50%;
+            margin-left: -130px;
+            margin-top: -160px;
+            z-index: 20;
+        }
+        /*负责翻转*/
+        .photo-wrap{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-transform-style: preserve-3d;
+            /*让其子元素支持3d变化*/
+            -webkit-transition: all 1s;
+            -moz-transition: all 1s;
+            -ms-transition: all 1s;
+            -o-transition: all 1s;
+            transition: all 1s;
+        }
+        .photo-wrap .side-front{
+            -webkit-transform: rotateY(0deg);
+        }
+        .photo-wrap .side-back{
+            -webkit-transform: rotateY(180deg);
+        }
+        .photo-wrap .side{
+            -webkit-backface-visibility: hidden;
+            /*当元素不面向屏幕时隐藏*/
+        }
+
+        .photo_front .photo-wrap{
+            -webkit-transform: rotateY(0deg);
+        }
+        .photo_back .photo-wrap{
+            -webkit-transform: rotateY(180deg);
+        }
+    </style>
+    <script type="text/javascript" src="demo.js"></script>
+</head>
+<body onselectstart="return false;">
+<!--防止页面文字被选中-->
+<div class="wrap">
+    <div class="photo photo_center photo_front" onclick="turn(this)">
+        <!--负责位移，xy轴-->
+        <div class="photo-wrap">
+            <!--负责3d翻转-->
+            <div class="side side-front">
+                <p class="image"><img src="sg4.jpg" alt="a"></p>
+                <p class="txt">花与爱丽丝</p>
+            </div>
+            <div class="side side-back">
+                <p class="desc">描素信息</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

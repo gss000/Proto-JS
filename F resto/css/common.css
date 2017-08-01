@@ -1,0 +1,113 @@
+.public-header{
+    height: 100px;
+    background: #fff;
+}
+
+.public-header .header-logo{
+    float: left;
+    margin-top: 40px;
+}
+
+.public-header .header-logo a{
+    width: 81px;
+    height: 30px;
+    background: url("../images/logo.png") no-repeat;
+}
+
+.public-header .header-nav{
+    float: right;
+    font-size: 14px;
+}
+
+.public-header .header-nav .item{
+    float: left;
+    margin-top: 44px;
+    margin-left: 50px;
+}
+
+.public-header .header-nav a{
+    position: relative;
+    padding: 8px 20px;
+    font-weight: bold;
+    color: #f34949;
+    font-family: "Aleo Regular";
+    font-size: 14px;
+}
+.header-nav a:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -4px;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #f4f9f8;
+
+}
+.header-nav a:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -4px;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #ff4a4a;
+    opacity: 0;
+    -webkit-transform: translate(8px,-10px);
+    -moz-transform: translate(8px,-10px);
+    -ms-transform: translate(8px,-10px);
+    -o-transform: translate(8px,-10px);
+    transform: translate(8px,-10px);
+}
+.header-nav a:before, .header-nav a:after, .header-nav a{
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.header-nav a:hover{color: #f34949;}
+.header-nav a:hover::before{
+    opacity: 0;
+}
+.header-nav a:hover::after{
+    opacity: 0.7;
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+.public-container{
+    position: relative;
+    margin: 0 auto;
+    width: 1100px;
+}
+
+.public-footer{
+    height: 200px;
+    padding-top: 20px;
+    background: #3b3b3b;
+}
+
+.public-footer .footer-col{
+    padding-top: 60px;
+    width: 230px;
+    float: left;
+    margin-right: 60px;
+    font-size: 16px;
+    color: #fff;
+    opacity: 0.8;
+    line-height: 1.8;
+}
+
+.footer-col .footer-logo{
+    width: 182px;
+    height: 30px;
+    margin-top: -10px;
+    background: url("../images/foot-logo.png") no-repeat;
+}
+
+.public-footer .footer-col:last-child{
+    margin-right: 0;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数传参，改变div属性</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        #div1{width: 300px;margin: 20px auto;}
+        #div1 p{margin: 10px 0; text-align: center;}
+        #ok, #reset{font-size: 13px; padding: 2px; margin: 5px;}
+        #box{width: 200px; height: 200px; margin: 0 auto; background: #c7002b;}
+    </style>
+</head>
+<body>
+<div id="div1">
+    <p>
+        输入属性名：
+        <input type="text" >
+    </p>
+    <p>
+        输入属性值：
+        <input type="text" >
+    </p>
+    <p class="btn">
+        <button id="ok">确定</button>
+        <button id="reset">重置</button>
+    </p>
+</div>
+<div id="box"></div>
+
+<script>
+    window.onload = function(){
+        var div1 = document.getElementById('div1');
+        var input = div1.getElementsByTagName('input');
+        var ok = document.getElementById('ok');
+        var reset = document.getElementById('reset');
+        var box = document.getElementById('box');
+        var ovalue, pName, pValue;
+
+        ok.onclick = function(){
+            pName = input[0].value;
+            pValue = input[1].value;
+            ovalue = box.style[pName];
+            if(pName == 'opacity' || pValue == 'backgrou'){
+                box.style[pName] = pValue;
+            }else{
+                box.style[pName] = pValue + 'px';
+            }
+        }
+        reset.onclick = function(){
+            box.removeAttribute('style');
+        }
+
+    }
+</script>
+</body>
+</html>

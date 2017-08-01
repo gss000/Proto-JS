@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>完美拖拽</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #box{
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            left: 50%;
+            top: 50%;
+            margin: -130px 0 0 -150px;
+            border: 1px solid #8c8c8c;
+        }
+        .hclick{
+            width: 300px;
+            height: 40px;
+            botder-bottom: 1px solid #8c8c8c;
+            background: #ccc;
+            cursor: move;
+        }
+        h3{
+            width: 130px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            float: right;
+            font-size: 16px;
+            font-weight: 500;
+            color: #ff2900;
+            cursor: pointer;
+        }
+        .info{
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div class="hclick"><h3 >点击按原路径返回</h3></div>
+    <p class="info">
+        <strong>Drag:</strong>
+        <span>false</span>
+    </p>
+    <p class="info">
+        <strong>Left:</strong>
+        <span></span>
+    </p>
+    <p class="info">
+        <strong>Top:</strong>
+        <span></span>
+    </p>
+</div>
+
+<script>
+    window.onload = function(){
+        var _box = $('box'),
+                oh3 = _box.getElementsByTagName('h3')[0],
+                hclick = _box.getElementsByTagName('div')[0],
+                spans = _box.getElementsByTagName('span');
+        var disX = 0, disY = 0, drag = false, maxl, maxt, timer;
+        var pos = [{x:_box.offsetLeft, y:_box.offsetTop}];
+
+        hclick.onmousedown = function(e){
+            var e = e || window.event;
+            drag = true;
+            disX = e.clientX - _box.offsetLeft;
+            disY = e.clientY - _box.offsetTop;
+            this.setCapture&&this.setCapture();
+            pos.push({x:_box.offsetLeft, y:_box.offsetTop});
+
+            document.onmousemove = function(e){
+                var e = e || window.event;
+                var disl = e.clientX - disX;
+                var dist = e.clientY - disY;
+                maxl = document.documentElement.clientWidth - _box.offsetWidth;
+                maxt = document.documentElement.clientHeight - _box.offsetHeight;
+
+                disl = disl<0 ? 0 : disl;
+                disl = disl>maxl ? maxl : disl;
+                dist = dist<0 ? 0 : dist;
+                dist = dist>maxt ? maxt : dist;
+
+                _box.style.marginLeft = _box.style.marginTop = 0;
+                _box.style.left = disl + 'px';
+                _box.style.top = dist + 'px';
+                pos.push({x:disl, y:dist});
+
+                dwrite();
+                return false;
+            }
+            dwrite();
+            return false;
+        }
+        hclick.onmouseup = function(){
+            document.onmousedown = null;
+            document.onmousemove = null;
+            hclick.releaseCapture&&hclick.releaseCapture();
+            drag = false;
+            dwrite();
+        }
+
+//        按原路径返回
+        oh3.onclick = function(){
+            if(pos.length == 1) return;
+            clearInterval(timer);
+            timer = setInterval(function(){
+                var opos = pos.pop();
+                opos ? (_box.style.left = opos.x + "px", _box.style.top = opos.y + "px",dwrite()) : clearInterval(timer);
+            }, 30);
+        }
+
+
+        function dwrite(){
+            spans[0].innerHTML = drag;
+            spans[1].innerHTML = _box.offsetLeft;
+            spans[2].innerHTML = _box.offsetTop;
+        }
+
+        function $(id){
+            return document.getElementById(id);
+        }
+
+        dwrite();
+    }
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日历</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        a{text-decoration: none;color: #777;}
+        .red{color: red;}
+        .date{cursor: pointer;}
+        .today{background: #F90;font-weight:bold;cursor:pointer;}
+        #date{position: relative;height: 20px;line-height: 20px;}
+        .pre{position: absolute;left: 10px;top: 5px;display: inline-block;width: 20px;height: 10px;}
+        .next{position: absolute;right: 10px;top: 5px;display: inline-block;width: 20px;height: 10px;}
+        .pre:hover, .next:hover{color: #ff4500;}
+        .curtime{font-size: 14px;color: #98a1a6;}
+        #calendar{width: 350px;margin: 50px auto;}
+        #date{text-align: center;border: 1px #ccc solid;border-bottom:0;padding: 5px;}
+        #date button{width: 40px; height: 20px;text-align: center;font-size: 10px;cursor: pointer;}
+        #selectDate{display: inline-block;width: 120px;}
+        #calTable{width: 100%;border-collapse: collapse;}
+        #calTable th,#calTable td{height: 30px;line-height: 30px;border: 1px #ccc solid;text-align: center;}
+        #calTable tbody{font-family:Georgia, "Times New Roman", Times, serif;}
+    </style>
+</head>
+<body>
+<div id="calendar">
+    <div id="date">
+        <a href="javascript:;" class="pre"><</a>
+        <div class="curtime">
+            <span class="cyear"></span>年<span class="cmonth"></span>月
+        </div>
+        <a href="javascript:;" class="next">></a>
+    </div>
+    <table id="calTable">
+        <thead>
+        <tr>
+            <th class="red">日</th>
+            <th>一</th>
+            <th>二</th>
+            <th>三</th>
+            <th>四</th>
+            <th>五</th>
+            <th class="red">六</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    window.onload = function(){
+        var nowYear = new Date().getFullYear();
+        var nowMonth = new Date().getMonth();
+        function calendar(tbody, year, month){
+            var monthDays = [31, 28+isRunYear(year), 31, 30,31, 30, 31, 31, 30, 31, 30, 31];
+            var curyear = new Date().getFullYear();
+            var curmonth = new Date().getMonth();
+            var curdate = new Date().getDate();
+            var date = new Date();
+            date.setYear(year);
+            date.setMonth(month);
+            date.setDate(1);
+            var weekday = date.getDay();
+            var tbody = document.getElementById(tbody);
+            var tds = tbody.getElementsByTagName('td');
+            for(var k=0;k<tds.length;k++){
+                tds[k].innerHTML = "";
+                tds[k].className = "";
+            }
+            for(var i=weekday;i<tds.length;i++){
+                var j = i - weekday + 1;
+                tds[i].innerHTML = j;
+                tds[i].className = 'date';
+                if(year==curyear&&month==curmonth&&j==curdate){
+                    tds[i].className = "today";
+                }
+                if(j>=monthDays[month]){
+                    break;
+                }
+            }
+
+        }
+        function isRunYear(year){
+            return (year%400===0 || (year%4===0 && year%100!==0))? 1 : 0;
+        }
+
+        var _cyear = document.querySelector('.cyear'),
+            _cmonth = document.querySelector('.cmonth');
+        var _pre = document.querySelector('.pre'),
+            _next = document.querySelector('.next');
+        _cyear.innerHTML = nowYear;
+        _cmonth.innerHTML = nowMonth+1;
+
+        calendar('tbody', nowYear, nowMonth);
+
+        _pre.onclick = function(){
+            nowMonth -= 1;
+            if(nowMonth < 0){
+                nowMonth = 11;
+                nowYear -= 1;
+                _cyear.innerHTML = nowYear;
+                _cmonth.innerHTML = nowMonth + 1;
+            }else{
+                _cmonth.innerHTML = nowMonth + 1;
+            }
+            calendar('tbody', nowYear, nowMonth);
+        }
+        _next.onclick = function(){
+            nowMonth += 1;
+            console.log(nowMonth)
+            if(nowMonth > 11){
+                nowMonth = 0;
+                nowYear += 1;
+                _cyear.innerHTML = nowYear;
+                _cmonth.innerHTML = nowMonth + 1;
+            }else{
+                _cmonth.innerHTML = nowMonth + 1;
+            }
+            calendar('tbody', nowYear, nowMonth);
+        }
+
+    }
+</script>
+</body>
+</html>

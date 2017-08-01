@@ -1,0 +1,379 @@
+//$toolbar-size: 52px;
+//.tool-bar{
+//  position: fixed;
+//  left: 50%;
+//  bottom: 10px;
+//  margin-left: -$toolbar-size / 2;
+//}
+//.toolbar-item{
+//  position: relative;
+//  display: block;
+//  margin-top: 1px;
+//  width: $toolbar-size;
+//  height: $toolbar-size;
+//  background-image: url("../img/toolbar.png");
+//  background-repeat: no-repeat;
+//
+//  &:hover {
+//    .toolbar-layer{
+//      opacity: 1;
+//      filter: Alpha(Opacity=100);
+//      transform: scale(1);
+//    }
+//  }
+//}
+//.toolbar-weixin{
+//  background-position: 0 -798px;
+//
+//  &:hover{
+//    background-position: 0 -860px;
+//  }
+//
+//  .toolbar-layer{
+//    height: 212px;
+//    background-position: 0 0;
+//  }
+//}
+//.toolbar-feedback{
+//  background-position: 0 -426px;
+//  &:hover{
+//    background-position: 0 -488px;
+//  }
+//}
+//.toolbar-app{
+//  background-position: 0 -550px;
+//  &:hover{
+//    background-position: 0 -612px;
+//  }
+//  .toolbar-layer{
+//    height: 194px;
+//    background-position: 0 -222px;
+//  }
+//}
+//.toolbar-top{
+//  background-position: 0 -674px;
+//  &:hover{
+//    background-position: 0 -736px;
+//  }
+//}
+//.toolbar-layer{
+//  position: absolute;
+//  right: $toolbar-size - 6;
+//  width: 172px;
+//  bottom: -10px;
+//  background-image: url("../img/toolbar.png");
+//  background-repeat: no-repeat;
+//  opacity: 0;
+//  filter: alpha(Opacity = 0);
+//  transform-origin: 95% 95%;
+//  transform: scale(0.01);
+//  transition: all 1s;
+//}
+
+
+
+
+
+
+
+
+
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?955odh');
+  src:  url('fonts/icomoon.eot?955odh#iefix') format('embedded-opentype'),
+  url('fonts/icomoon.ttf?955odh') format('truetype'),
+  url('fonts/icomoon.woff?955odh') format('woff'),
+  url('fonts/icomoon.svg?955odh#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-wechat:before {
+  content: "\e900";
+}
+.icon-weixin:before {
+  content: "\e900";
+}
+.icon-mobile:before {
+  content: "\e958";
+}
+.icon-bubble2:before {
+  content: "\e96e";
+}
+.icon-arrow-up2:before {
+  content: "\ea3a";
+}
+
+@mixin transition($transition){
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+@mixin opacity($opacity){
+  opacity: $opacity;
+  -ms-filter: Alpha(Opacity=$opacity);
+  filter: Alpha(Opacity=$opacity * 100);
+}
+@mixin transform-origin($origin){
+  -webkit-transform-origin: $origin;
+  -moz-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  -o-transform-origin: $origin;
+  transform-origin: $origin;
+}
+
+$toolbar-size: 52px;
+.toolbar-item, .toolbar-btn, .toolbar-icon, .toolbar-text{
+  width: $toolbar-size;
+  height: $toolbar-size;
+}
+.toolbar-icon, .toolbar-text{
+  position: absolute;
+  left: 0;
+  color: #fff;
+  text-align: center;
+  @include transition(top 1s);
+}
+
+
+.toolbar{
+  position: fixed;
+  left: 50%;
+  bottom: 10px;
+  margin-left: -$toolbar-size / 2;
+}
+.toolbar-item{
+  position: relative;
+  display: block;
+  margin-top: 1px;
+
+  &:hover{
+    .toolbar-icon{
+      top: -$toolbar-size;
+    }
+    .toolbar-text{
+      top: 0;
+    }
+
+    .toolbar-layer{
+      @include opacity(1);
+      transform: scale(1);
+    }
+  }
+}
+.toolbar-btn{
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+}
+.toolbar-icon{
+  top: 0;
+  background: #d0d6d9;
+  font-size: 30px;
+  line-height: $toolbar-size;
+}
+.toolbar-text{
+  top: $toolbar-size;
+  background: #98a1a6;
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+.toolbar-layer{
+  position: absolute;
+  right: $toolbar-size - 6;
+  bottom: -10px;
+  width: 172px;
+  background-image: url("../img/toolbar.png");
+  background-repeat: no-repeat;
+  @include opacity(0);
+  @include transform-origin(95% 95%);
+  transform: scale( 0.01);
+  @include transition(all 1s);
+}
+.toolbar-layer-weixin{
+  height: 212px;
+  background-position: 0 0;
+}
+.toolbar-layer-app{
+  height: 194px;
+  background-position: 0 -222px;
+}
+
+
+
+
+
+
+
+
+//@mixin transition($transition){
+//  -webkit-transition: $transition;
+//  -moz-transition: $transition;
+//  -ms-transition: $transition;
+//  -o-transition: $transition;
+//  transition: $transition;
+//}
+//
+//@mixin scale($num){
+//  -webkit-transform: scale($num);
+//  -moz-transform: scale($num);
+//  -ms-transform: scale($num);
+//  -o-transform: scale($num);
+//  transform: scale($num);
+//}
+//
+//@mixin transform-origin($origin){
+//  -webkit-transform-origin: $origin;
+//  -moz-transform-origin: $origin;
+//  -ms-transform-origin: $origin;
+//  -o-transform-origin: $origin;
+//  transform-origin: $origin;
+//}
+//
+//@mixin opacity($opacity){
+//  opacity: $opacity;
+//  -ms-filter: Alpha(Opacity=$opacity);
+//  filter: Alpha(Opacity=$opacity * 100);
+//}
+//
+//$toolbar-size: 52px;
+//.toolbar{
+//  position: fixed;
+//  left: 50%;
+//  bottom: 10px;
+//  margin-left: -$toolbar-size / 2;
+//}
+//.toolbar-item{
+//  position: relative;
+//  display: block;
+//  width: $toolbar-size;
+//  height: $toolbar-size;
+//  margin-top: 1px;
+//
+//  &:after{
+//    content: '';
+//    position: absolute;
+//    right: $toolbar-size;
+//    width: 172px;
+//    bottom: -10px;
+//    background-image: url("../img/toolbar.png");
+//    background-repeat: no-repeat;
+//    @include opacity(0);
+//    @include transform-origin(95% 95%);
+//    @include scale(0.01);
+//    @include transition(all 1s);
+//  }
+//}
+//.toolbar-btn{
+//  position: absolute;
+//  left: 0;
+//  right: 0;
+//  width: $toolbar-size;
+//  overflow: hidden;
+//
+//
+//  font-family: 'icomoon' !important;
+//  speak: none;
+//  font-style: normal;
+//  font-weight: normal;
+//  font-variant: normal;
+//  text-transform: none;
+//  line-height: 1;
+//
+//  /* Better Font Rendering =========== */
+//  -webkit-font-smoothing: antialiased;
+//  -moz-osx-font-smoothing: grayscale;
+//
+//  &:before{//icon
+//    content: '';
+//    position: absolute;
+//    left:0;
+//    top: 0;
+//    width: $toolbar-size;
+//    height: $toolbar-size;
+//    background: #d0d6d9;
+//    font-size: 30px;
+//    line-height: $toolbar-size;
+//    text-align: center;
+//    color: #fff;
+//    @include transition(top 1s);
+//  }
+//
+//  &:after{//text
+//    content: '';
+//    position: absolute;
+//    left:0;
+//    top: $toolbar-size;
+//    width: $toolbar-size;
+//    height: $toolbar-size;
+//    background: #d0d6d9;
+//    font-size: 12px;
+//    line-height: 1.2;
+//    padding-top: 12px;
+//    text-align: center;
+//    color: #fff;
+//    @include transition(top 1s);
+//  }
+//}
+//.toolbar-item-weixin{
+//    &:after{
+//      content: '';
+//      height: 212px;
+//      background-position: 0 0;
+//}
+//  .toolbar-btn{
+//    &:before{
+//      content: '\e900';
+//    }
+//    &:after{
+//      content: 'gongzhognzhanghao';
+//    }
+//  }
+//}
+//.toolbar-item-feedback{
+//  .toolbar-btn{
+//    &:before{
+//      content: '\e96e';
+//    }
+//  }
+//}
+//.toolbar-item-app{
+//    &:after{
+//      content: '';
+//      height: 194px;
+//      background-position: 0 -222px;
+//    }
+//  .toolbar-btn{
+//    &:before{
+//      content: '\e958';
+//    }
+//  }
+//}
+//.toolbar-item-top{
+//  .toolbar-btn{
+//    &:before{
+//      content: '\ea3a';
+//    }
+//  }
+//}

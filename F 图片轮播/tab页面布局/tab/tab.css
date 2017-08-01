@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.tab{
+    width: 330px;
+    height: 170px;
+    margin: 20px auto;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+}
+.title{
+    list-style: none;
+    height: 40px;
+    background: #f8f6f8;
+    position: relative;
+}
+.title ul{
+    position: absolute;
+    width: 331px;
+    /*left: -1px;*/
+    /*ul绝对定位之后，并且在总宽度上加一个像素，左移一个像素使得边框不会出现2个像素*/
+}
+.tab .title ul li{
+    float: left;
+    width: 70px;
+    height: 39px;
+    line-height: 39px;
+    text-align: center;
+    overflow: hidden;
+    background: #f8f6f8;
+    padding: 0 6px;
+    border-bottom: 1px solid #eee;
+}
+.tab ul li.select{
+    background: #fff;
+    border-bottom: 1px solid #fff;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+}
+.tab ul li a{
+    font-size: 12px;
+    color: #444;
+    text-decoration: none;
+}
+.tab ul li a:hover{
+    color: #ff4700;
+    font-weight: bold;
+}
+
+.content .mod{
+    margin: 10px;
+}
+.content .mod ul{
+    list-style: none;
+}
+.content .mod ul li{
+    float: left;
+    width: 310px;
+    height: 25px;
+    line-height: 25px;
+}

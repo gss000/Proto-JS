@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <title>年月日联动</title>
+    <meta http-equiv='Content-Type' charset="UTF-8">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            padding: 50px;
+        }
+        select{
+            height: 30px;
+            padding: 0 5px;
+        }
+    </style>
+</head>
+<body>
+<form name="form">
+    <select name="Year" onchange="yearChange(this.value)">
+        <option value="">请选择年份</option>
+    </select>
+    <select name="Month" onchange="monChange(this.value)" >
+        <option value="">请选择月份</option>
+    </select>
+    <select name="Day" >
+        <option value="" >请选择日期</option>
+    </select>
+</form>
+
+<script type="text/javascript">
+    var stryear = document.form.Year.outerHTML;
+    var strmon = document.form.Month.outerHTML;
+    var strday = document.form.Day.outerHTML;
+    var MonDay = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var curYear = new Date().getFullYear();
+
+    window.onload = function(){
+        //年份下拉框赋内 容
+        var stry = stryear.substring(0, stryear.length-9);
+        for(var i = (curYear-30); i<(curYear+30); i++){
+            stry += "<option value='"+ i +"'>" + i + "</option>\r\n";
+        }
+        document.form.Year.outerHTML = stry + '</select>';
+
+        //月份下拉框赋内容
+        var strm = strmon.substring(0, strmon.length-9);
+        for(var i=1; i<13; i++){
+            strm += "<option value='"+ i + "'>" + i + "</option>\r\n";
+        }
+        document.form.Month.outerHTML = strm + "</select>";
+//        document.form.Year.value = curYear;
+//        document.form.Month.value = new Date().getMonth() + 1;
+
+//        var num = MonDay[new Date().getMonth()];
+//        var yearValue = document.form.Year.value;
+//        if(new Date().getMonth() == 1 && isRunYear(yearValue)){
+//            num ++;
+//        }
+//        //日期下拉框赋内容
+//        writeallday(num);
+    }
+
+    //年份发生变化时日期变化,主要判断是否为闰年
+    function yearChange(str){
+        var Monvalue = document.form.Month.options[document.form.Month.selectedIndex].value;
+        if(Monvalue == ''){
+            document.form.Day.outerHTML = strday;
+            return;
+        }
+        var daynum = MonDay[Monvalue - 1];
+        if(Monvalue == 2 && isRunYear(str)){
+            daynum++
+        };
+        writeallday(daynum);
+    }
+
+    //月份发生变化时,日期联动
+    function monChange(str){
+        var yearvalue = document.form.Year.options[document.form.Year.selectedIndex].value;
+        if(str == ''){
+            document.form.Day.outerHTML = strday;
+            return;
+        }
+        var daynum = MonDay[str - 1];
+        if(str == 2 && isRunYear(yearvalue)){
+            daynum++;
+        }
+        writeallday(daynum)
+    }
+
+    function writeallday(n){
+        var strd = strday.substring(0, strday.length - 9);
+        for(var i=1; i<(n+1); i++){
+            strd += "<option value='"+ i +"'>" + i + "</option>\r\n";
+        }
+        document.form.Day.outerHTML = strd + '</select>';
+    }
+
+    function isRunYear(year){
+        return ( year%4 == 0) && ( year/100 != 0 || year%400 == 0);
+    }
+
+</script>
+</body>
+</html>

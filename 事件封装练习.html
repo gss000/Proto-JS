@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件封装练习</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #box{
+            width: auto;
+            height: 300px;
+            background: #ccc;
+            border: 1px dotted #666666;
+            padding: 5px 10px;
+            margin: 10px;
+        }
+        .btn{
+            position: relative;
+            left: 50%;
+            margin-left: -150px;
+            width: 220px;
+        }
+        .btn input{
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<div class="btn">
+    <input type="button" value="点击没效果">
+    <input type="button" value="绑定click">
+    <input type="button" value="解除绑定">
+</div>
+
+<script type="text/javascript">
+    window.onload = function(){
+        var box = document.getElementById('box');
+        var inputs = document.getElementsByTagName('input');
+
+
+        addEvent(inputs[1], 'click', function(){
+            addEvent(inputs[0], 'click', alerttxt);
+            inputs[0].value = "可以点击了";
+        });
+
+        addEvent(inputs[2], 'click', function(){
+            removeEvent(inputs[0], 'click', alerttxt);
+            inputs[0].value = "点击没效果";
+        });
+
+    }
+    function addEvent(obj, type, fn){
+        if(obj.attachEvent){
+            obj.attachEvent('on'+type, fn);
+        }else if(obj.addEventListener){
+            obj.addEventListener(type, fn);
+        }
+    }
+
+    function removeEvent(obj, type, fn){
+        if(obj.removeEventListener){
+            obj.removeEventListener(type, fn);
+        }else{
+            obj.detachEvent('on'+type, fn);
+        }
+    }
+
+    function alerttxt(){
+        alert("事件绑定成功！");
+    }
+</script>
+
+</body>
+</html>

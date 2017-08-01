@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>透明度变化</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            font-family: 微软雅黑;
+        }
+        #div1{
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            background: orangered;
+            opacity: 0.3;
+            -ms-filter: Alpha(Opacity=30);
+            filter: Alpha(Opacity=30);
+        }
+    </style>
+    <script src="opacity.js"></script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>

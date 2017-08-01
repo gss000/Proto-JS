@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片自动展开</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            margin: 0 auto;
+            width: 500px;
+        }
+        /*.image{*/
+            /*height: 300px;*/
+        /*}*/
+        img{
+            display: block;
+            width: 500px;
+            height: 0;
+        }
+        .title{
+            width: 500px;
+            height: 100px;
+            line-height: 100px;
+            background: #CCC;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function show(){
+            addCount();
+            setTimeout('reduceCount()', 3000);
+        }
+
+        var time = 300;
+        var h = 0;
+        function addCount(){
+            var img = document.getElementById('image');
+            if(time > 0 ){
+                time--;
+                h = h + 5;
+            }else{
+                return;
+            }
+            if(h >= 300){
+                return;
+            }else{
+                img.style.height = h + 'px';
+            }
+            setTimeout('addCount()', 30);
+        }
+
+        var T = 300,
+            N = 300;
+        function reduceCount(){
+            var img = document.getElementById('image');
+            if(T > 0 ){
+                T--;
+                N = N - 5;
+            }else{
+                return;
+            }
+            if(N <= 0){
+                img.style.display = 'none';
+            }else{
+                img.style.height = N + 'px';
+            }
+            setTimeout('reduceCount()', 30);
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <div class="image" >
+        <img id="image" src="river.jpg" alt="">
+    </div>
+    <div class="title">网页页面</div>
+</div>
+</body>
+</html>

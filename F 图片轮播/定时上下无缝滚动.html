@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定时上下无缝滚动</title>
+    <style>
+        img{
+            display: block;
+            width: 480px;
+            height: 270px;
+        }
+        ul, li{
+            list-style: none;
+        }
+        #box {
+            margin: 0 auto;
+            width: 480px;
+            height: 270px;
+            overflow: hidden;
+            position: relative;
+        }
+        #ul{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #ul li{
+            background: #fff;
+            opacity: 1;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+        }
+        #ol{
+            position: absolute;
+            bottom: 10px;
+            left: 203px;
+        }
+        #ol li{
+            float: left;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: #ccc;
+            color: #f62368;
+            margin-right: 1px;
+            cursor: pointer;
+        }
+        #ol .active{
+            background: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="ul">
+        <li style="display: block;"><img src="img/sg1.jpg" alt=""></li>
+        <li><img src="img/sg2.jpg" alt=""></li>
+        <li><img src="img/sg3.jpg" alt=""></li>
+    </div>
+    <div id="ol">
+        <li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+    </div>
+</div>
+
+<script>
+//    1.思路1： 将ul复制一份，但滚动一半距离重新归位；（大型网站性能略低）
+//    2.思路2： 通过相对定位,将第一个li移动到最后，再将ul和Li归位。
+    window.onload = function(){
+        var _box = document.getElementById('box');
+        var _ul = document.getElementById('ul');
+        var uLi = _ul.getElementsByTagName('li');
+        var _ol = document.getElementById('ol');
+        var oLi = _ol.getElementsByTagName('li');
+        var liH = uLi[0].offsetHeight;
+        var iol = 0;//针对按钮的值
+        var iul = 0;//用于滚动
+        var timer = null;
+
+        for(var i=0; i<oLi.length; i++){
+            oLi[i].index = i;
+            oLi[i].onmouseover = function(){
+                for(var j=0;j<oLi.length; j++){
+                    oLi[j].className = '';
+                }
+                this.className = 'active';
+                iol = this.index;
+                iul = this.index;
+                startMove(_ul, {top: -liH*this.index});
+            }
+        }
+
+        timer = setInterval(run, 2000);
+
+        function run(){
+            if(iol == 0){
+                iul = 0;
+                uLi[0].style.position = 'static';
+                _ul.style.top = 0;
+                //还原li并把ul归位
+//                _ul.removeChild(_ul.lastChild);
+            }
+            if(iol == oLi.length-1){
+                iol = 0;
+                uLi[0].style.position = 'relative';
+                uLi[0].style.top = liH * uLi.length + 'px';
+                //将第一个li移到最后
+//                var clone = document.createElement('li');
+//                clone.innerHTML = '<img src="img/sg1.jpg" alt="">';
+//                _ul.appendChild(clone);
+            }else{
+                iol ++;
+            }
+            iul ++;
+            for(var i=0;i<oLi.length;i++){
+                oLi[i].className = '';
+            }
+            oLi[iol].className = 'active';
+            startMove(_ul, {top: -iul*liH});
+        }
+
+        _box.onmouseover = function(){
+            clearInterval(timer);
+        }
+        _box.onmouseout = function(){
+            timer = setInterval(run, 2000);
+        }
+
+        function startMove(obj, json, fn){
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function(){
+                var flag = true;
+                for(var attr in json){
+                    var icur = 0;
+                    if(attr == 'opacity'){
+                        icur = Math.ceil(parseFloat(getStyle(obj, attr)*100));
+                    }else{
+                        icur = parseInt(getStyle(obj, attr));
+                    }
+                    var speed = (json[attr] - icur)/5;
+                    speed = speed>0 ? Math.ceil(speed) : Math.floor(speed);
+                    if(icur != attr){
+                        flag = false;
+                    }
+                    if(attr == 'opacity'){
+                        obj.style.opacity = (icur + speed)/100;
+                        obj.style.filter = 'alpha(opacity:'+ icur + speed +')';
+                    }else{
+                        obj.style[attr] = icur + speed + 'px';
+                    }
+                }
+                if(flag){
+                    if(fn){
+                        fn();
+                    }
+                }
+
+            }, 30);
+        }
+
+        function getStyle(obj, attr){
+            if(obj.currentStyle){
+                return obj.currentStyle[attr];
+            }else{
+                return window.getComputedStyle(obj, null)[attr];
+            }
+        }
+
+    }
+
+
+</script>
+</body>
+</html>

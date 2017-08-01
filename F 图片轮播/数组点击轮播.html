@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        img{
+            width: 500px;
+            height: 300px;
+        }
+        .box{
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+            margin: 10px auto;
+        }
+        .box ul{
+            position: relative;
+            width:2200px;
+        }
+        .box ul li{
+            position: relative;
+            /*很关键，脱离文档流之后circle数组的图片才会出现在左侧*/
+            float: left;
+        }
+        #btn{
+             display: block;
+             margin: 10px auto;
+             width: 50px;
+             height: 30px;
+             line-height: 25px;
+             font-size: 12px;
+             text-align: center;
+             cursor: pointer;
+             outline: none;
+         }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul id="ul">
+        <li><img src="img/sg1.jpg" alt=""></li>
+        <li><img src="img/sg2.jpg" alt=""></li>
+        <li><img src="img/sg3.jpg" alt=""></li>
+        <li><img src="img/sg4.jpg" alt=""></li>
+        <li><img src="img/sg5.jpg" alt=""></li>
+    </ul>
+</div>
+<button id="btn">下一张</button>
+<script type="text/javascript">
+    var show = [], circle = [];
+    var _btn = document.getElementById('btn');
+    var _ul = document.getElementById('ul');
+    var _li = _ul.getElementsByTagName('li');
+    var liwidth = 500;
+    var ulwidth = liwidth * _li.length;
+    var goaway = "translate(-" + liwidth + "px,0)translateZ(0px)";
+    var goin = "translate(0,0)translateZ(0px)";
+    var gopre = "translate(" + liwidth + "px,0)translateZ(0px)";
+
+    //将第一第二个元素加到show数组里面，将其他的加到circle数组里
+    _ul.style.width = ulwidth + 'px';
+    for(var i=0; i<_li.length; i++){
+        var curli = _li[i];
+
+        curli.setAttribute('data-index', i);
+        curli.style.width = liwidth + 'px';
+
+        if(i == 0){
+            curli.style.left = 0;
+            show.push(curli);
+        }else{
+            curli.style.left = - liwidth * i + 'px';
+            if(i > 1){
+                translates(curli, goaway, '');
+                circle.push(curli);
+            }else{
+                show.push(curli);
+                translates(curli, gopre, '');
+            }
+        }
+    }
+
+    function translates(obj, gotype, time){
+        obj.style.transform =
+                obj.style.mozTransform =
+                        obj.style.msTransform =
+                                obj.style.oTransform =
+                                        obj.style.webkitTransform = gotype;
+        obj.style.transitionDuration =
+                obj.style.webkitTransitionDuration =
+                        obj.style.oTransitionDuration =
+                                obj.style.mozTransitionDuration = time;
+    }
+
+
+
+    _btn.onclick = function(){
+        //已经展示的图片滚出
+        var showfirst = show.shift();
+        translates(showfirst, goaway, '300ms');
+
+        //正在展示的图片
+        translates(show[0], goin, "300ms");
+        circle.splice(0, 0, showfirst);
+
+        //准备下一站展示的图片
+        var nextpre = circle.pop();
+        translates(nextpre, gopre, '0ms');
+        show.push(nextpre);
+
+
+    }
+</script>
+</body>
+</html>

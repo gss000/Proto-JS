@@ -1,0 +1,173 @@
+
+.loginpanel{
+  position: absolute;
+  top: 200px;
+  left: 500px;
+  width: 380px;
+  height: 248px;
+  background: #f6f6f6;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 8px #000;
+  -moz-box-shadow: 0 0 8px #000;
+  box-shadow: 0 0 8px #000;
+}
+.ui-boxclose{
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: -10px;
+  right: -10px;
+  cursor: pointer;
+  background: url('../images/boxy_btn.png') no-repeat;
+  z-index: 1;
+}
+.login-webqq-logo{
+  margin-left: 100px;
+  margin-top: 10px;
+  width: 200px;
+  height: 44px;
+  background: url("../images/login_window_logo.png");
+  background-position: -200px 0;
+  cursor: move;
+}
+.inputs{
+  width: 300px;
+  height: 90px;
+  margin-left: 80px;
+  margin-top: 30px;
+}
+.sign-input{
+  display: block;
+  padding-bottom: 20px;
+  font-weight: bold;
+  font-size: 17px;
+}
+.input01{
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+.bottomDiv{
+  margin-left: 70px;
+}
+.btn{
+  width: 111px;
+  height: 36px;
+  border: 0;
+  margin-left: 14px;
+  background: url("../images/login_btn.png") no-repeat -111px 0;
+  cursor: pointer;
+}
+.login-state-trigger{
+  cursor: pointer;
+  display: block;
+  float: left;
+  //margin: 4px 0 0 0;
+  margin: 14px 0 0 20px;
+  width: 120px;
+  height: 16px;
+  overflow: hidden;
+}
+//.login-state-tigger2{
+//  margin: 10px 0 0 20px;
+//}
+.login-state-down{
+  background: url("../images/ptlogin.png") no-repeat  0 -22px;
+  background-color: transparent;
+  background-attachment: scroll;
+  float: left;
+  margin-top: 5px;
+  overflow: hidden;
+  text-indent: -999em;
+  height: 6px;
+  width: 7px;
+}
+.login-state-show{
+  float: left;
+  width: 14px;
+  height: 14px;
+  overflow: hidden;
+  text-indent: -999em;
+  margin: 1px 4px 0 0;
+}
+.login-state-txt{
+  float: left;
+  margin-left: 5px;
+  font-size: 12px;
+  //>line-height:18px!important;
+}
+.login-state{
+  .callme{
+    background: url("../images/ptlogin.png") -72px 0 no-repeat;
+  }
+}
+.login-state{
+  .online{
+    background: url("../images/ptlogin.png") 0 0 no-repeat;
+  }
+}
+.login-state{
+  .away{
+    background: url("../images/ptlogin.png") -18px 0 no-repeat;
+  }
+}
+.login-state{
+  .busy{
+    background: url("../images/ptlogin.png") -36px 0 no-repeat;
+  }
+}
+.login-state{
+  .silent{
+    background: url("../images/ptlogin.png") -108px 0 no-repeat;
+  }
+}
+.login-state{
+  .hidden{
+    background: url("../images/ptlogin.png") -52px 0 no-repeat;
+  }
+}
+.statePanel{
+  display: none;
+  position: absolute;
+  right: 68px;
+  top: 194px;
+  z-index: 1;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc #6a6a6a #666 #cdcdcd;
+  padding: 0;
+  width: 100px;
+  height: 133px;
+  overflow:  hidden;
+  background: #fff;
+  line-height: 1.5;
+  font-size: 12px;
+}
+.statePanel{
+  .statePanel-li{
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 3px 0;
+    width: 100px;
+    height: 16px;
+    line-height: 16px;
+    overflow: hidden;
+    zoom: 1;
+    cursor: pointer;
+  }
+}
+.stateSelect-icon{
+  float: left;
+  margin: 3px 0 0 5px;
+  width: 14px;
+  height: 14px;
+  overflow: hidden;
+}
+.stateSelect-text{
+  margin: 0 0 0 22px;
+}
+

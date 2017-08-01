@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>信息滚动</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            /*margin: 0 auto;*/
+            list-style: none;
+        }
+        li{
+            height: 22px;
+        }
+        a{
+            text-decoration: none;
+            color: #000;
+
+        }
+        a:hover{
+            color: #c7002b;
+        }
+        .box{
+            margin: 50px auto 0;
+            width: 380px;
+            /*height: 220px;*/
+            border: 1px solid #98a1a6;
+            box-shadow: 1px 1px 2px #98a1a6;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        #title{
+            width: 200px;
+            background: #C71B0A;
+            color: #FFFFFF;
+            padding: 20px 120px;
+        }
+        #box2{
+            margin-top: 10px;
+            margin-left: 30px;
+            width: 320px;
+            height: 144px;
+            overflow: hidden;
+        }
+        #box2 ul li{
+            font-size: 14px;
+            line-height: 20px;
+        }
+        #box2 ul li span{
+            /*display: block;*/
+            float: right;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2 id="title">实时新闻</h2>
+    <div id="box2">
+        <ul id="ul1">
+            <li><a href="">1.习近平：全面从严治党</a><span>2017-3-5</span></li>
+            <li><a href="">2.八年抗战改为十四年抗战</a><span>2017-3-5</span></li>
+            <li><a href="">3.你是希拉里的走狗</a><span>2017-3-5</span></li>
+            <li><a href="">4.雅戈尔募集巨资</a><span>2017-3-5</span></li>
+            <li><a href="">5.中兴手机大裁员 </a><span>2017-3-5</span></li>
+            <li><a href="">6.新兵携枪支进入云南</a><span>2017-3-5</span></li>
+            <li><a href="">7.调整立正稍息姿势</a><span>2017-3-5</span></li>
+            <li><a href="">8.游客昆明抓海鸥拍照</a><span>2017-3-5</span></li>
+            <li><a href="">9.男子偷遍哈尔滨小区</a><span>2017-3-5</span></li>
+            <li><a href="">10.美国总统特朗普</a><span>2017-3-5</span></li>
+        </ul>
+        <ul id="ul2"></ul>
+    </div>
+</div>
+
+
+
+<script language="JavaScript" type="text/javascript">
+    //连续滚动
+    var box2 = document.getElementById('box2');
+    var con1 = document.getElementById('ul1');
+    var con2 = document.getElementById('ul2');
+    var time = 50;
+    box2.scrollTop = 10;
+    con2.innerHTML = con1.innerHTML;
+    function rollnews(){
+        if(box2.scrollTop >= con1.offsetHeight){
+            box2.scrollTop = 0;
+        }else{
+            box2.scrollTop ++;
+        }
+    }
+    var roll = setInterval(rollnews, time);
+    box2.onmouseover = function(){
+        clearInterval(roll);
+    }
+    box2.onmouseout = function(){
+        roll = setInterval(rollnews, time);
+    }
+
+</script>
+</body>
+</html>

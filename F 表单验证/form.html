@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单验证</title>
+    <style>
+        span{
+            margin-left: 5px;
+            font-size: 14px;
+        }
+        .stats1{
+            color: #cccccc;
+        }
+        .stats2{
+            color: #000;
+        }
+        .stats3{
+            color: #d81939;
+        }
+        .stats4{
+            color: #6f9400;
+        }
+        .submit{
+            font-size: 14px;
+            width: 60px;
+            height: 30px;
+            line-height: 20px;
+            text-align: center;
+            margin: 10px 34px;
+        }
+    </style>
+    <script type="text/javascript" src="form.js"></script>
+</head>
+<body>
+<form action="url" method="get">
+    <p>用户名：</p><input type="text" name="username"/><span class="stats1">用户名不能为空</span><br/>
+    <p>邮 箱：</p><input type="text" name="email"/><span class="stats1">邮箱不能为空</span><br/>
+    <P>密 码:</P><input type="password" name="password"/><span class="stats1">密码不能为空</span><br/>
+    <P>确认密码：</P><input type="password" name="checkpass"/><span class="stats1">密码不能为空</span><br/>
+    <input type="submit" class="submit">
+</form>
+</body>
+</html>

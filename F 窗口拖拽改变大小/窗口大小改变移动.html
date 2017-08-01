@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>窗口移动改变大小</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #drag{
+            position: absolute;
+            width: 300px;
+            height: 160px;
+            background: #e9e9e9;
+            border: 1px solid #444;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 3px 2px #666666;
+            -moz-box-shadow: 0 1px 3px 2px #666666;
+            box-shadow: 0 1px 3px 2px #666666; }
+        .title{
+            position: relative;
+            cursor: move;
+            height: 27px;
+            margin: 5px;}
+        .title h2{
+            font-size: 14px;
+            height: 27px;
+            line-height: 24px;
+            border-bottom: 1px solid #A1B4B0;}
+        .title div{
+            position: absolute;
+            height: 19px;
+            top: 2px;
+            right: 0;
+        }
+        .title div a{
+            float: left;
+            width: 21px;
+            height: 19px;
+            display: block;
+            margin-left: 5px;
+            background: url("tool.png") no-repeat;
+        }
+        .title div a.min{
+            background-position: -29px 0;
+        }
+        .title div a.max{
+            background-position: -60px 0;
+        }
+        .title div a.revert{
+            background-position: -149px 0;
+            display: none;
+        }
+        .title div a.close{
+            background-position: -89px 0;
+        }
+        .resizeL, .resizeT, .resizeR, .resizeB, .resizeLT, .resizeRT, .resizeBL{
+            position: absolute;
+            background: #000;
+            overflow: hidden;
+            opacity: 0;
+        }
+        #drag .resizeL{
+            top: 0;
+            width: 5px;
+            height: 100%;
+            cursor: w-resize;
+        }
+        #drag .resizeT{
+            top: 0;
+            width: 100%;
+            height: 5px;
+            cursor: n-resize;
+        }
+        #drag .resizeR{
+            right: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            cursor: w-resize;
+        }
+        #drag .resizeB{
+            bottom: 0;
+            width: 100%;
+            height: 5px;
+            cursor: n-resize;
+        }
+        #drag .resizeLT{
+            top: 0;
+            left: 0;
+            cursor: nw-resize;
+            width: 8px;
+            height: 8px;
+            background: #ff0;
+        }
+        #drag .resizeRT{
+            top: 0;
+            right: 0;
+            cursor: ne-resize;
+            width: 8px;
+            height: 8px;
+            background: #ff0;
+        }
+        #drag .resizeBR{
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            cursor: nw-resize;
+            background: url("resize.png") no-repeat;
+        }
+        #drag .resizeBL{
+            left: 0;
+            bottom: 0;
+            cursor: ne-resize;
+            width: 8px;
+            height: 8px;
+            background: #ff0;
+        }
+        #drag .content{
+            overflow: auto;
+            margin: 0 5px;
+            font-size: 12px;
+        }
+        .open{
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            margin-left: -10px;
+            float: left;
+            width: 21px;
+            height: 19px;
+            display: block;
+            background: url("tool.png") no-repeat 0 0;
+        }
+    </style>
+</head>
+<body>
+<div id="drag">
+    <div class="title">
+        <h2>点击拖动</h2>
+        <div>
+            <a href="javascript:;" class="min" title="最小化"></a>
+            <a href="javascript:;" class="max" title="最大化"></a>
+            <a href="javascript:;" class="revert" title="还原"></a>
+            <a href="javascript:;" class="close" title="关闭"></a>
+        </div>
+    </div>
+    <div class="resizeL"></div>
+    <div class="resizeT"></div>
+    <div class="resizeR"></div>
+    <div class="resizeB"></div>
+    <div class="resizeLT"></div>
+    <div class="resizeRT"></div>
+    <div class="resizeBR"></div>
+    <div class="resizeBL"></div>
+    <div class="content">
+        <p>1.窗口可以拖动</p>
+        <p>2.窗口改变大小</p>
+        <p>3.窗口最大化，最小化，关闭，还原操作</p>
+    </div>
+</div>
+
+<script>
+    var get = {
+        byId: function(id){
+            return typeof id === "string" ? document.getElementById(id):id;
+        },
+        byClass:function(cls, oparent){
+            var arrcls = [];
+            var reclass = new RegExp("(^| )" + cls + "( |$)");
+            var aele = this.byTagName("*", oparent);
+            for(var i=0;i<aele.length;i++) reclass.test(aele[i].className) && arrcls.push(aele[i]);
+            return arrcls;
+        },
+        byTagName:function(ele, obj){
+            return (obj || document).getElementsByTagName(ele);
+        }
+    }
+    var dragminwidth = 250;
+    var dragminheight = 124;
+    //        拖拽函数
+    function drag(odrag, handle){
+        var disx = 0, disy = 0;
+        var omin = get.byClass('min', odrag)[0],
+            omax = get.byClass('max', odrag)[0],
+            orevert = get.byClass('revert', odrag)[0],
+            oclose = get.byClass('close', odrag)[0];
+        handle = handle || odrag;
+        handle.style.cursor = "move";
+
+        handle.onmousedown = function(e){
+            var e = e || window.event;
+            disx = e.clientX - odrag.offsetLeft;
+            disy = e.clientY - odrag.offsetTop;
+            document.onmousemove = function(e){
+                var e = e || window.event;
+                var maxl = document.documentElement.clientWidth - odrag.offsetWidth;
+                var maxt = document.documentElement.clientHeight - odrag.offsetHeight;
+                var il = e.clientX - disx;
+                var it = e.clientY - disy;
+
+                il<=0 &&(il=0);
+                it<=0 &&(it=0);
+                il>=maxl &&(il=maxl);
+                it>=maxt &&(it=maxt);
+                odrag.style.left = il + 'px';
+                odrag.style.top = it + 'px';
+                return false;
+            }
+
+            document.onmouseup = function(){
+                document.onmousemove = null;
+                document.onmousedown = null;
+                this.releaseCapture && this.releaseCapture();
+            }
+            this.setCapture && this.setCapture();
+            return false;
+        }
+
+        omax.onclick = function(){
+            odrag.style.top = odrag.style.left = 0;
+            odrag.style.width = document.documentElement.clientWidth -2 +"px";
+            odrag.style.height = document.documentElement.clientHeight - 2 + 'px';
+            this.style.display = "none";
+            orevert.style.display = "block";
+        }
+
+        orevert.onclick = function(){
+            odrag.style.width = dragminwidth + 'px';
+            odrag.style.height = dragminheight + 'px';
+            odrag.style.left = (document.documentElement.clientWidth - odrag.offsetWidth) / 2 + "px";
+            odrag.style.top = (document.documentElement.clientHeight - odrag.offsetHeight) / 2 + "px";
+            this.style.display = "none";
+            omax.style.display = "block";
+        }
+
+        omin.onclick = oclose.onclick = function(){
+            odrag.style.display = "none";
+            var oa = document.createElement("a");
+            oa.className = "open";
+            oa.href = "javascript:;";
+            oa.title = "还原";
+            document.body.appendChild(oa);
+            oa.onclick = function(){
+                odrag.style.display = "block";
+                document.body.removeChild(this);
+                this.onclick = null;
+            }
+        }
+//        阻止冒泡
+        omin.onmousedown = omax.onmousedown = oclose.onmousedown = function(event){
+            this.onfocus = function(){
+                this.blur();
+            }
+            var e = event || window.event;
+            if(e.cancelBubble){
+                e.cancelBubble = true;
+            }else{
+                e.stopPropagation();
+            }
+        }
+    }
+//    大小改变函数
+    function resize(oparent, handle, isleft, istop, lockx, locky){
+        handle.onmousedown = function(e){
+            var e = e || window.event;
+            var disx = e.clientX - handle.offsetLeft;
+            var disy = e.clientY - handle.offsetTop;
+            var iparentTop = oparent.offsetTop;
+            var iparentLeft = oparent.offsetLeft;
+            var iparentWidth = oparent.offsetWidth;
+            var iparentHeight = oparent.offsetHeight;
+
+            document.onmousemove = function(e){
+                var e = e || window.event;
+
+                var il = e.clientX - disx;
+                var it = e.clientY - disy;
+                var maxw = document.documentElement.clientWidth - oparent.offsetLeft - 2;
+                var maxh = document.documentElement.clientHeight - oparent.offsetTop - 2;
+                var iw = isleft ? iparentWidth - il : handle.offsetWidth + il;
+                var ih = istop ? iparentHeight - it : handle.offsetHeight + it;
+                console.log(maxw, oparent.offsetLeft, document.documentElement.clientWidth);
+
+                isleft && (oparent.style.left = iparentLeft + il + 'px');
+                istop && (oparent.style.top = iparentTop + it + 'px');
+
+                iw<dragminwidth &&(iw = dragminwidth);
+                iw>maxw && (iw = maxw);
+                lockx || (oparent.style.width = iw + 'px');
+
+                ih<dragminheight &&(ih = dragminheight);
+                ih>maxh &&(ih = maxh);
+                locky || (oparent.style.height = ih + 'px');
+
+                if((isleft && iw == dragminwidth) || (istop && ih ==dragminheight)) document.onmousemove = null;
+                return false;
+            }
+            document.onmouseup = function(){
+                document.onmousedown = null;
+                document.onmousemove = null;
+            }
+            return false;
+        }
+    }
+
+    window.onload = function(){
+        var odrag = document.getElementById("drag");
+        var otitle = get.byClass("title", odrag)[0];
+        var oL = get.byClass("resizeL", odrag)[0];
+        var oT = get.byClass("resizeT", odrag)[0];
+        var oR = get.byClass("resizeR", odrag)[0];
+        var oB = get.byClass("resizeB", odrag)[0];
+        var oLT = get.byClass("resizeLT", odrag)[0];
+        var oTR = get.byClass("resizeRT", odrag)[0];
+        var oBR = get.byClass("resizeBR", odrag)[0];
+        var oLB = get.byClass("resizeBL", odrag)[0];
+
+//        四角
+        resize(odrag, oLT, true, true, false, false);
+        resize(odrag, oTR, false, true, false, false);
+        resize(odrag, oBR, false, false, false, false);
+        resize(odrag, oLB, true, false, false, false);
+        //四边
+        resize(odrag, oL, true, false, false, true);
+        resize(odrag, oT, false, true, true, false);
+        resize(odrag, oR, false, false, false, true);
+        resize(odrag, oB, false, false, true, false);
+
+        drag(odrag, otitle);
+        odrag.style.left = (document.documentElement.clientWidth - odrag.offsetWidth)/2 + 'px';
+        odrag.style.top = (document.documentElement.clientHeight - odrag.offsetHeight)/2 + 'px';
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+</script>
+</body>
+</html>

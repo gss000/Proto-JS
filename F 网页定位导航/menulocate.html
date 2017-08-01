@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物导航</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .menu-body{
+            width: 1300px;
+            margin: 0 auto;
+        }
+        .floor{
+            margin-top: 20px;
+            padding-bottom: 20px;
+            border: 1px dotted #9b9b9b;
+            overflow: hidden;
+        }
+        h2{
+            width: 1260px;
+            margin: 0 auto;
+            padding-top: 16px;
+            padding-left: 10px;
+            padding-bottom: 4px;
+            font-weight: bold;
+            border-bottom: 2px solid #0088bb;
+        }
+        .floor ul {
+            width: 1260px;
+            margin-left: 10px;
+        }
+        .floor ul li{
+            float: left;
+            padding-top: 24px;
+            padding-left: 20px;
+            list-style: none;
+
+        }
+        .floor li a img{
+            border: none;
+        }
+        .menu{
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            margin-left: 650px;
+        }
+
+        .menu ul li{
+            margin-top: 4px;
+            padding-left: 4px;
+            list-style: none;
+        }
+        .menu ul li a{
+            display: block;
+            width: 70px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 18px;
+            color: #000;
+            text-decoration: none;
+            text-align: center;
+
+        }
+        #menu ul li a:hover,
+        #menu ul li a.default{
+            color: #FFFFFF;
+            background: #0088bb;
+        }
+    </style>
+
+    <script src="jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div id="menu" class="menu">
+    <ul>
+        <li><a class="default" href="#onefloor">1F 男装</a></li>
+        <li><a href="#twofloor">2F 女装</a></li>
+        <li><a href="#threefloor">3F 美妆</a></li>
+        <li><a href="#fourfloor">4F 数码</a></li>
+        <li><a href="#fivefloor">5F 母婴</a></li>
+    </ul>
+</div>
+
+<div id="menu-body" class="menu-body">
+    <h1>疯狗购物</h1>
+    <div id="onefloor" class="floor">
+        <h2>1F 男装</h2>
+        <ul>
+            <li><a href=""><img src="1F.jpg"></a></li>
+            <li><a href=""><img src="1F.jpg"></a></li>
+            <li><a href=""><img src="1F.jpg"></a></li>
+            <li><a href=""><img src="1F.jpg"></a></li>
+            <li><a href=""><img src="1F.jpg"></a></li>
+            <li><a href=""><img src="1F.jpg"></a></li>
+            <li><a href=""><img src="1F.jpg"></a></li>
+            <li><a href=""><img src="1F.jpg"></a></li>
+            <li><a href=""><img src="1F.jpg"></a></li>
+        </ul>
+    </div>
+    <div id="twofloor" class="floor">
+        <h2>2F 女装</h2>
+        <ul>
+            <li><a href=""><img src="2F.jpg"></a></li>
+            <li><a href=""><img src="2F.jpg"></a></li>
+            <li><a href=""><img src="2F.jpg"></a></li>
+            <li><a href=""><img src="2F.jpg"></a></li>
+            <li><a href=""><img src="2F.jpg"></a></li>
+            <li><a href=""><img src="2F.jpg"></a></li>
+            <li><a href=""><img src="2F.jpg"></a></li>
+            <li><a href=""><img src="2F.jpg"></a></li>
+            <li><a href=""><img src="2F.jpg"></a></li>
+        </ul>
+    </div>
+    <div id="threefloor" class="floor">
+        <h2>3F 美妆</h2>
+        <ul>
+            <li><a href=""><img src="3F.jpg"></a></li>
+            <li><a href=""><img src="3F.jpg"></a></li>
+            <li><a href=""><img src="3F.jpg"></a></li>
+            <li><a href=""><img src="3F.jpg"></a></li>
+            <li><a href=""><img src="3F.jpg"></a></li>
+            <li><a href=""><img src="3F.jpg"></a></li>
+            <li><a href=""><img src="3F.jpg"></a></li>
+            <li><a href=""><img src="3F.jpg"></a></li>
+            <li><a href=""><img src="3F.jpg"></a></li>
+        </ul>
+    </div>
+    <div id="fourfloor" class="floor">
+        <h2>4F 数码</h2>
+        <ul>
+            <li><a href=""><img src="4F.png"></a></li>
+            <li><a href=""><img src="4F.png"></a></li>
+            <li><a href=""><img src="4F.png"></a></li>
+            <li><a href=""><img src="4F.png"></a></li>
+            <li><a href=""><img src="4F.png"></a></li>
+            <li><a href=""><img src="4F.png"></a></li>
+            <li><a href=""><img src="4F.png"></a></li>
+            <li><a href=""><img src="4F.png"></a></li>
+            <li><a href=""><img src="4F.png"></a></li>
+        </ul>
+    </div>
+    <div id="fivefloor" class="floor">
+        <h2>5F 母婴</h2>
+        <ul>
+            <li><a href=""><img src="5F.jpg"></a></li>
+            <li><a href=""><img src="5F.jpg"></a></li>
+            <li><a href=""><img src="5F.jpg"></a></li>
+            <li><a href=""><img src="5F.jpg"></a></li>
+            <li><a href=""><img src="5F.jpg"></a></li>
+            <li><a href=""><img src="5F.jpg"></a></li>
+            <li><a href=""><img src="5F.jpg"></a></li>
+            <li><a href=""><img src="5F.jpg"></a></li>
+            <li><a href=""><img src="5F.jpg"></a></li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+//    $(document).ready(function(){
+//        $(window).scroll(function(){
+//            //找到并确定现在滚动条所在的楼层，并获取当前楼层的ID
+//            var top = $(document).scrollTop();//
+//            var menu = $("#menu");
+//            var items = $("#menu-body").find(".floor");
+//            var currentId = "" ;//当前所在楼层的ID
+//            items.each(function(){
+//                var m = $(this);
+//                var itemTop = m.offset().top;//m.offset().top代表每一个item的顶部位置
+//                if(top > itemTop-200){
+//                    currentId = "#" + m.attr("id");
+//                }else{
+//                    return false;
+//                }
+//            });
+//            //给相应的楼层a添加default，同时取消其他楼层的default
+//            var defaultLink = menu.find(".default");
+//            if(currentId && defaultLink.attr("href") != currentId){
+//                defaultLink.removeClass("default");
+//                menu.find("[href="+currentId+"]").addClass("default");
+//            }
+//
+//        });
+//    });
+
+    window.onload = function(){
+        window.onscroll = function(){//监听滚动条滚动
+            //兼容
+            var scrolltop = document.documentElement ? document.documentElement.scrollTop:document.body.scrollTop;
+            var menus = document.getElementById('menu').getElementsByTagName('a');
+            var floor = getClass('menu-body', 'floor');
+            var currentId= "";
+            for(var i=0; i < floor.length; i++){
+                var floorH = floor[i].offsetTop;
+                if(scrolltop > floorH - 200){
+                    currentId = floor[i].id;//下面的判定无需 #所以和jq不一样
+                }else{
+                    break;
+                }
+            }
+
+            if(currentId){//给正确的menu下的a元素添加和移除class
+                for(var j = 0; j < menus.length; j++){
+                    //获取a href的值，
+                    var href = menus[j].href.split("#");
+
+
+                    if(href[href.length - 1] != currentId){
+                        removeClass(menus[j], "default");
+                    }else{
+                        addClass(menus[j], "default");
+                    }
+
+                }
+            }
+        }
+    };
+
+    function getClass(parent, classname){
+        var par = parent ? document.getElementById(parent):document;
+        var arr = [];
+        elements = par.getElementsByTagName('*');
+
+        for(var i=0; i<elements.length; i++){
+            if(elements.className == classname ){
+                arr.push(elements[i]);
+            }
+        }
+        return arr;
+    }
+
+    function hasClass(obj, cls){
+        return obj.className.match(new RegExp("(\\s|^)" + cls + "(\\s|$)"));
+        //正则表达式，判断对象（obj）className是否包含cls
+    }
+
+    function removeClass(obj, cls){
+        if(hasClass(obj, cls)){
+            var reg = new RegExp("(\\s|^)" + cls + "(\\s|$)");
+            obj.className = obj.className.replace(reg, "");
+        }
+    }
+
+    function addClass(obj, cls){
+        if(!hasClass(obj, cls)){
+            obj.className += " " + cls;
+        }
+    }
+
+</script>
+
+</body>
+</html>

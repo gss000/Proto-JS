@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>css3动画练习</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .demo{width:750px;height: 135px;margin: 50px auto;overflow: hidden;}
+        .imgs{width: 240px;height: 135px;margin-right: 10px;float:left; transform: translate(0, 100%);}
+        .imgs img{display: block;width: 240px;height: 135px; cursor:pointer;}
+        .item1{animation: bounce  linear 1s;transform: translate(0, 0);}
+        .item2{animation: bounce  linear 1.3s; transform: translate(0, 0);}
+        .item3{animation: bounce  linear 1.6s; transform: translate(0, 0);}
+
+        @keyframes bounce {
+            0% {transform: translate(0, 100%);opacity: 0;}
+            10% {transform: translate(0, 90%);opacity: 0.1;}
+            20% {transform: translate(0, 80%);opacity: 0.2;}
+            30% {transform: translate(0, 70%);opacity: 0.3;}
+            40% {transform: translate(0, 60%);opacity: 0.4;}
+            50% {transform: translate(0, 50%);opacity: 0.5;}
+            60% {transform: translate(0, 40%);opacity: 0.6;}
+            70% {transform: translate(0, 30%);opacity: 0.7;}
+            80% {transform: translate(0, 20%);opacity: 0.8;}
+            90% {transform: translate(0, 10%);opacity: 0.9;}
+            100% {transform: translate(0, 0);opacity: 1;}
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var timer = null;
+            var _demo = document.getElementById('demo');
+            var item = _demo.getElementsByTagName('div');
+            timer = setTimeout(function(){
+                for(var i=0; i < item.length; i++){
+                    item[i].index = i + 1;
+                    item[i].className += " item"+ item[i].index +"";
+                }
+            }, 1000);
+        }
+    </script>
+</head>
+<body>
+<div class="demo" id="demo">
+    <div class="imgs ">
+        <img src="img/sg1.jpg" alt="1">
+    </div>
+    <div class="imgs">
+        <img src="img/sg2.jpg" alt="2">
+    </div>
+    <div class="imgs">
+        <img src="img/sg3.jpg" alt="3">
+    </div>
+</div>
+</body>
+</html>
